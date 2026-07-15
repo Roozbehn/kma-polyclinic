@@ -1,3 +1,12 @@
+/**
+ * Static MVP fallback when Sanity returns empty.
+ * Prefer CMS docs in production; keep this file in sync with Studio seed checklist.
+ *
+ * Seed rules:
+ * - Create translated department + priority service docs for tr / en / fa / ar
+ * - Department `checkup-laboratory` must set `faOnly: true` (visible only on `/fa`)
+ * - Legal pages fall back via `getMvpLegal` in `@/lib/mvp-legal`
+ */
 import {
   getDepartmentBySlug,
   getDepartments,
@@ -24,7 +33,8 @@ interface LocaleBundle {
   priorityServices: MvpService[];
 }
 
-const DEPARTMENT_SLUGS = [
+/** Department slugs editors should create in Sanity (with locale translations). */
+export const MVP_DEPARTMENT_SLUGS = [
   "aesthetics",
   "dermatology",
   "dentistry",
@@ -33,6 +43,17 @@ const DEPARTMENT_SLUGS = [
   "eyebrow-transplant",
   "checkup-laboratory",
 ] as const;
+
+/** Priority service slugs for home + service routes. */
+export const MVP_PRIORITY_SERVICE_SLUGS = [
+  "eyebrow-transplant",
+  "hair-transplant",
+  "botox",
+  "filler",
+  "laser",
+] as const;
+
+const DEPARTMENT_SLUGS = MVP_DEPARTMENT_SLUGS;
 
 function dept(
   slug: (typeof DEPARTMENT_SLUGS)[number],
