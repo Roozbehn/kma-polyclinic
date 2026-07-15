@@ -3,6 +3,9 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { DocumentLang } from "@/components/DocumentLang";
+import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
+import { SiteFooter } from "@/components/SiteFooter";
+import { SiteHeader } from "@/components/SiteHeader";
 import { routing, isRtlLocale } from "@/i18n/routing";
 import "../globals.css";
 
@@ -38,7 +41,12 @@ export default async function LocaleLayout({
   return (
     <div lang={locale} dir={dir} className={`${fraunces.variable} ${dmSans.variable}`}>
       <DocumentLang lang={locale} dir={dir} />
-      <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+      <NextIntlClientProvider messages={messages}>
+        <SiteHeader />
+        {children}
+        <SiteFooter />
+        <FloatingWhatsApp />
+      </NextIntlClientProvider>
     </div>
   );
 }
