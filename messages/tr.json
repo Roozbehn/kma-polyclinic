@@ -1,0 +1,18 @@
+{
+  "brand": "KMA PolyClinic",
+  "nav": {
+    "home": "Ana Sayfa",
+    "about": "Hakkımızda",
+    "departments": "Bölümler",
+    "gallery": "Galeri",
+    "contact": "İletişim",
+    "eyebrow": "Kaş Ekimi",
+    "hair": "Saç Ekimi"
+  },
+  "cta": {
+    "whatsapp": "WhatsApp",
+    "call": "Ara",
+    "appointment": "Randevu Al"
+  },
+  "whatsappPrefill": "Merhaba, KMA PolyClinic'ten randevu almak istiyorum."
+}

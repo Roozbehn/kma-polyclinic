@@ -1,0 +1,18 @@
+{
+  "brand": "KMA PolyClinic",
+  "nav": {
+    "home": "خانه",
+    "about": "درباره ما",
+    "departments": "بخش‌ها",
+    "gallery": "گالری",
+    "contact": "تماس",
+    "eyebrow": "کاشت ابرو",
+    "hair": "کاشت مو"
+  },
+  "cta": {
+    "whatsapp": "واتساپ",
+    "call": "تماس",
+    "appointment": "رزرو نوبت"
+  },
+  "whatsappPrefill": "سلام، می‌خواهم از کلینیک KMA PolyClinic نوبت بگیرم."
+}

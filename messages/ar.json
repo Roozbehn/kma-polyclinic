@@ -1,0 +1,18 @@
+{
+  "brand": "KMA PolyClinic",
+  "nav": {
+    "home": "الرئيسية",
+    "about": "من نحن",
+    "departments": "الأقسام",
+    "gallery": "المعرض",
+    "contact": "اتصل بنا",
+    "eyebrow": "زراعة الحواجب",
+    "hair": "زراعة الشعر"
+  },
+  "cta": {
+    "whatsapp": "واتساب",
+    "call": "اتصل",
+    "appointment": "احجز موعدًا"
+  },
+  "whatsappPrefill": "مرحبًا، أود حجز موعد في عيادة KMA PolyClinic."
+}

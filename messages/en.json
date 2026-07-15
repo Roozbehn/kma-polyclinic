@@ -1,0 +1,18 @@
+{
+  "brand": "KMA PolyClinic",
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "departments": "Departments",
+    "gallery": "Gallery",
+    "contact": "Contact",
+    "eyebrow": "Eyebrow Transplant",
+    "hair": "Hair Transplant"
+  },
+  "cta": {
+    "whatsapp": "WhatsApp",
+    "call": "Call",
+    "appointment": "Book Appointment"
+  },
+  "whatsappPrefill": "Hello, I would like to book an appointment at KMA PolyClinic."
+}
