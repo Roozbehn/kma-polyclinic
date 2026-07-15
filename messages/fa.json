@@ -14,5 +14,11 @@
     "call": "تماس",
     "appointment": "رزرو نوبت"
   },
+  "home": {
+    "headline": "مراقبت آرام در قلب استانبول",
+    "support": "پلی‌کلینیک خصوصی برای زیبایی، مو و سلامت پزشکی.",
+    "priorityServices": "درمان‌های اولویت‌دار",
+    "departments": "بخش‌ها"
+  },
   "whatsappPrefill": "سلام، می‌خواهم از کلینیک KMA PolyClinic نوبت بگیرم."
 }

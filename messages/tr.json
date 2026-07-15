@@ -14,5 +14,11 @@
     "call": "Ara",
     "appointment": "Randevu Al"
   },
+  "home": {
+    "headline": "İstanbul’un kalbinde sakin bir bakım",
+    "support": "Estetik, saç ve medikal wellness için özel poliklinik.",
+    "priorityServices": "Öncelikli tedaviler",
+    "departments": "Bölümler"
+  },
   "whatsappPrefill": "Merhaba, KMA PolyClinic'ten randevu almak istiyorum."
 }

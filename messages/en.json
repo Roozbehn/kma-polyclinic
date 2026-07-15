@@ -14,5 +14,11 @@
     "call": "Call",
     "appointment": "Book Appointment"
   },
+  "home": {
+    "headline": "Quiet care in the heart of Istanbul",
+    "support": "A private polyclinic for aesthetics, hair, and medical wellness.",
+    "priorityServices": "Priority treatments",
+    "departments": "Departments"
+  },
   "whatsappPrefill": "Hello, I would like to book an appointment at KMA PolyClinic."
 }

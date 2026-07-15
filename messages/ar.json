@@ -14,5 +14,11 @@
     "call": "اتصل",
     "appointment": "احجز موعدًا"
   },
+  "home": {
+    "headline": "عناية هادئة في قلب إسطنبول",
+    "support": "عيادة خاصة للتجميل وزراعة الشعر والعافية الطبية.",
+    "priorityServices": "علاجات ذات أولوية",
+    "departments": "الأقسام"
+  },
   "whatsappPrefill": "مرحبًا، أود حجز موعد في عيادة KMA PolyClinic."
 }
