@@ -1,17 +1,23 @@
 import { createClient, type SanityClient } from "next-sanity";
 
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "placeholder";
+const rawProjectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID?.trim() || "";
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
 
-export const isSanityConfigured =
-  Boolean(process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) &&
-  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID !== "placeholder";
+/** Sanity project IDs are short (≈8 chars). Long strings are usually API tokens. */
+function isValidSanityProjectId(id: string): boolean {
+  return /^[a-z0-9]{6,16}$/i.test(id);
+}
+
+export const isSanityConfigured = isValidSanityProjectId(rawProjectId);
+
+const projectId = isSanityConfigured ? rawProjectId : "placeholder";
 
 export const sanityClient: SanityClient = createClient({
   projectId,
   dataset,
   apiVersion: "2025-01-01",
   useCdn: true,
+  token: process.env.SANITY_API_READ_TOKEN || undefined,
 });
 
 async function fetchOrEmpty<T>(
@@ -20,8 +26,14 @@ async function fetchOrEmpty<T>(
   fallback: T,
 ): Promise<T> {
   if (!isSanityConfigured) return fallback;
-  return sanityClient.fetch<T>(query, params);
+  try {
+    return await sanityClient.fetch<T>(query, params);
+  } catch (error) {
+    console.error("[sanity] fetch failed, using fallback", error);
+    return fallback;
+  }
 }
+
 
 export async function getDepartments(locale: string) {
   return fetchOrEmpty(
