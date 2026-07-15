@@ -1,0 +1,37 @@
+# KMA PolyClinic
+
+> KMA PolyClinic is a multi-specialty medical polyclinic in Fulya, Istanbul, offering aesthetics, dermatology, dentistry, plastic surgery, hair and eyebrow transplant, and (for Persian patients) check-up & laboratory services.
+
+## NAP
+
+- Name: KMA PolyClinic
+- Address: Fulya Mah. Büyükdere Cad. Torun Center A Blok No:74A — İç Kapı No:10, Istanbul, TR
+- Phone: +90 212 680 79 00
+- Email: info@kmapolyclinic.com.tr
+- Hours: Monday–Saturday 11:00–19:00
+- Website: https://kmapolyclinic.com.tr
+- Languages: Turkish (tr), English (en), Persian (fa), Arabic (ar)
+
+## Departments
+
+- Aesthetics
+- Dermatology
+- Dentistry
+- Plastic Surgery
+- Hair Transplant
+- Eyebrow Transplant
+- Check-up & Laboratory (fa locale only)
+
+## Priority Services
+
+- Eyebrow Transplant
+- Hair Transplant
+- Botox
+- Filler
+- Laser
+
+## Social
+
+- Instagram: https://www.instagram.com/kma_polyclinic/
+- Facebook: https://www.facebook.com/kmapolyclinicc
+- TikTok: https://www.tiktok.com/@kmapoliklinik

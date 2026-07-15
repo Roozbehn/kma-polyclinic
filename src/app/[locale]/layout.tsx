@@ -1,4 +1,5 @@
 import { Fraunces, DM_Sans } from "next/font/google";
+import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -7,6 +8,7 @@ import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { routing, isRtlLocale } from "@/i18n/routing";
+import { localeLanguageAlternates, SITE_URL } from "@/lib/schema-org";
 import "../globals.css";
 
 const fraunces = Fraunces({
@@ -23,6 +25,21 @@ const dmSans = DM_Sans({
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    metadataBase: new URL(SITE_URL),
+    alternates: {
+      canonical: `/${locale}`,
+      languages: localeLanguageAlternates(""),
+    },
+  };
 }
 
 export default async function LocaleLayout({
