@@ -3,6 +3,7 @@
 import { FormEvent, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { NAP } from "@/lib/nap";
+import { getMetaClickIds, newMetaEventId, trackMetaEvent, trackMetaPixel } from "@/lib/meta/client";
 
 export type ContactDepartmentOption = {
   slug: string;
@@ -18,6 +19,7 @@ type ContactPanelProps = {
 const hoursLabel = `${NAP.hours.days[0]}–${NAP.hours.days[NAP.hours.days.length - 1]} ${NAP.hours.opens}–${NAP.hours.closes}`;
 
 const mapsSrc = `https://www.google.com/maps?q=${NAP.geo.lat},${NAP.geo.lng}&z=16&output=embed`;
+const mapsOpenUrl = `https://www.google.com/maps?q=${NAP.geo.lat},${NAP.geo.lng}`;
 
 export function ContactPanel({ departments }: ContactPanelProps) {
   const locale = useLocale();
@@ -28,6 +30,18 @@ export function ContactPanel({ departments }: ContactPanelProps) {
     event.preventDefault();
     const form = event.currentTarget;
     const data = new FormData(form);
+    const name = String(data.get("name") || "").trim();
+    const phone = String(data.get("phone") || "").trim();
+    const email = String(data.get("email") || "").trim();
+    const department = String(data.get("department") || "").trim() || undefined;
+    const message = String(data.get("message") || "").trim() || undefined;
+    const eventId = newMetaEventId();
+    const { fbp, fbc } = getMetaClickIds();
+
+    trackMetaPixel("Schedule", eventId, {
+      content_category: "appointment",
+      ...(department ? { content_name: department } : {}),
+    });
 
     setStatus("submitting");
     try {
@@ -35,13 +49,17 @@ export function ContactPanel({ departments }: ContactPanelProps) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: String(data.get("name") || "").trim(),
-          phone: String(data.get("phone") || "").trim(),
-          email: String(data.get("email") || "").trim(),
-          department: String(data.get("department") || "").trim() || undefined,
-          message: String(data.get("message") || "").trim() || undefined,
+          name,
+          phone,
+          email,
+          department,
+          message,
           locale,
           website: String(data.get("website") || ""),
+          eventId,
+          fbp,
+          fbc,
+          eventSourceUrl: window.location.href,
         }),
       });
       if (!res.ok) throw new Error("lead_failed");
@@ -115,14 +133,46 @@ export function ContactPanel({ departments }: ContactPanelProps) {
 
         <aside className="contact-panel__nap">
           <h2 className="brand-display section-heading">{t("napHeading")}</h2>
-          <a href={`tel:${NAP.phoneTel}`}>{NAP.phoneDisplay}</a>
-          <a href={`mailto:${NAP.email}`}>{NAP.email}</a>
+          <a
+            href={`tel:${NAP.phoneTel}`}
+            onClick={() => {
+              void trackMetaEvent({ eventName: "Contact", customData: { content_name: "phone" } });
+            }}
+          >
+            {NAP.phoneDisplay}
+          </a>
+          <a
+            href={`mailto:${NAP.email}`}
+            onClick={() => {
+              void trackMetaEvent({
+                eventName: "Contact",
+                email: NAP.email,
+                customData: { content_name: "email" },
+              });
+            }}
+          >
+            {NAP.email}
+          </a>
           <p>
             {NAP.streetAddress}
             <br />
             {NAP.addressLocality}, {NAP.addressCountry}
           </p>
           <p>{hoursLabel}</p>
+          <a
+            className="btn-ghost"
+            href={mapsOpenUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => {
+              void trackMetaEvent({
+                eventName: "FindLocation",
+                customData: { content_name: "torun-center" },
+              });
+            }}
+          >
+            {t("mapTitle")}
+          </a>
           <div className="contact-panel__map">
             <iframe
               title={t("mapTitle")}

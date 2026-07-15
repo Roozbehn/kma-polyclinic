@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { parseLeadBody } from "@/lib/leads";
+import { sendMetaCapIEvent } from "@/lib/meta/capi";
 import { createMemoryRateLimiter } from "@/lib/rate-limit";
 
 const limiter = createMemoryRateLimiter({ limit: 5, windowMs: 60_000 });
@@ -21,6 +22,26 @@ export async function POST(req: NextRequest) {
   }
   if (parsed.data.website) {
     return NextResponse.json({ ok: true });
+  }
+
+  const eventId = parsed.data.eventId;
+  if (eventId && parsed.data.eventSourceUrl) {
+    void sendMetaCapIEvent({
+      eventName: "Schedule",
+      eventId,
+      eventSourceUrl: parsed.data.eventSourceUrl,
+      user: {
+        email: parsed.data.email || undefined,
+        phone: parsed.data.phone,
+        clientIpAddress: ip === "unknown" ? undefined : ip,
+        clientUserAgent: req.headers.get("user-agent") || undefined,
+        fbp: parsed.data.fbp,
+        fbc: parsed.data.fbc,
+      },
+      customData: parsed.data.department
+        ? { content_name: parsed.data.department, content_category: "appointment" }
+        : { content_category: "appointment" },
+    }).catch((err) => console.error("[meta-capi] schedule", err));
   }
 
   const resendKey = process.env.RESEND_API_KEY;

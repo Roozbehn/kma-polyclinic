@@ -2,6 +2,7 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { Reveal } from "@/components/motion/Reveal";
+import { trackMetaEvent } from "@/lib/meta/client";
 import { whatsappHref } from "@/lib/whatsapp";
 
 export function FloatingWhatsApp() {
@@ -11,7 +12,18 @@ export function FloatingWhatsApp() {
 
   return (
     <Reveal className="floating-wa">
-      <a className="btn-primary" href={href} target="_blank" rel="noopener noreferrer">
+      <a
+        className="btn-primary"
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => {
+          void trackMetaEvent({
+            eventName: "Contact",
+            customData: { content_name: "whatsapp" },
+          });
+        }}
+      >
         {t("cta.whatsapp")}
       </a>
     </Reveal>

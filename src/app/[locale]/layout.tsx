@@ -5,6 +5,7 @@ import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { DocumentLang } from "@/components/DocumentLang";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
+import { MetaPixel } from "@/components/MetaPixel";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { routing, isRtlLocale } from "@/i18n/routing";
@@ -58,6 +59,7 @@ export default async function LocaleLayout({
   return (
     <div lang={locale} dir={dir} className={`${fraunces.variable} ${dmSans.variable}`}>
       <DocumentLang lang={locale} dir={dir} />
+      <MetaPixel />
       <NextIntlClientProvider messages={messages}>
         <SiteHeader />
         {children}

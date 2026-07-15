@@ -8,6 +8,10 @@ export const leadSchema = z.object({
   department: z.string().max(80).optional(),
   message: z.string().max(2000).optional(),
   website: z.string().max(0).optional(),
+  eventId: z.string().min(8).max(80).optional(),
+  fbp: z.string().max(200).optional(),
+  fbc: z.string().max(200).optional(),
+  eventSourceUrl: z.string().url().max(2000).optional(),
 });
 
 export function parseLeadBody(body: unknown) {
