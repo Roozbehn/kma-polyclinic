@@ -2,6 +2,7 @@ import { Fraunces, DM_Sans } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { DocumentLang } from "@/components/DocumentLang";
 import { routing, isRtlLocale } from "@/i18n/routing";
 import "../globals.css";
 
@@ -35,10 +36,9 @@ export default async function LocaleLayout({
   const dir = isRtlLocale(locale) ? "rtl" : "ltr";
 
   return (
-    <html lang={locale} dir={dir} className={`${fraunces.variable} ${dmSans.variable}`}>
-      <body>
-        <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
-      </body>
-    </html>
+    <div lang={locale} dir={dir} className={`${fraunces.variable} ${dmSans.variable}`}>
+      <DocumentLang lang={locale} dir={dir} />
+      <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+    </div>
   );
 }
