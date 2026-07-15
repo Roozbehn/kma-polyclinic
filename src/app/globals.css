@@ -207,6 +207,26 @@ body {
   font-size: clamp(1.6rem, 3vw, 2rem);
 }
 
+.content-page {
+  padding: var(--space-section) clamp(1.25rem, 4vw, 3rem);
+  max-width: 40rem;
+  display: grid;
+  gap: 1.25rem;
+  animation: hero-rise 700ms var(--ease-out) both;
+}
+
+.content-page__title {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  line-height: 1.1;
+}
+
+.content-page__summary {
+  margin: 0;
+  color: var(--color-ink-muted);
+  font-size: 1.05rem;
+}
+
 .service-highlight,
 .department-grid {
   padding: var(--space-section) clamp(1.25rem, 4vw, 3rem);

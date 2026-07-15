@@ -1,4 +1,8 @@
-import { getDepartments, getPriorityServices } from "@/lib/sanity";
+import {
+  getDepartmentBySlug,
+  getDepartments,
+  getPriorityServices,
+} from "@/lib/sanity";
 import type { AppLocale } from "@/lib/whatsapp";
 
 export interface MvpDepartment {
@@ -169,4 +173,19 @@ export async function getPriorityServicesForLocale(locale: string) {
   const fromSanity = await getPriorityServices(locale);
   if (fromSanity.length > 0) return fromSanity;
   return mvpServicesFor(locale);
+}
+
+export async function getDepartmentBySlugForLocale(locale: string, slug: string) {
+  const fromSanity = await getDepartmentBySlug(locale, slug);
+  if (fromSanity) return fromSanity as MvpDepartment;
+  const key = isAppLocale(locale) ? locale : "tr";
+  return mvpContent[key].departments.find((d) => d.slug === slug) ?? null;
+}
+
+export async function getServiceBySlugForLocale(locale: string, slug: string) {
+  const services = await getPriorityServicesForLocale(locale);
+  const fromList = services.find((s) => s.slug === slug);
+  if (fromList) return fromList as MvpService;
+  const key = isAppLocale(locale) ? locale : "tr";
+  return mvpContent[key].priorityServices.find((s) => s.slug === slug) ?? null;
 }
