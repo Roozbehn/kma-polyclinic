@@ -81,11 +81,46 @@ Mark them as priority / homepage services per your schema so `getPriorityService
 
 Until CMS is populated, `getDepartmentsForLocale` / `getPriorityServicesForLocale` use `mvp-content.ts`.
 
-## Deploy notes
+## Deploy (Vercel)
 
-1. Deploy the `kma-web` app on Vercel (or similar) from this directory.
-2. Set the env vars above in the host dashboard.
-3. Attach `kmapolyclinic.com.tr` (and redirect `kmapolyclinic.tr` → `.com.tr` when redirect rules are added).
-4. Confirm `/tr` loads, `/fa` has `dir="rtl"`, WhatsApp numbers differ by locale, and contact form returns 200 when Resend is configured.
+`vercel.json` permanently redirects apex/`www` on `.tr` and `www` on `.com.tr` to `https://kmapolyclinic.com.tr/:path*`.
+
+### 1. Project + env
+
+1. From this directory, create/link a Vercel project (`vercel link` or Import Git Repo in the dashboard).
+2. Set all environment variables from `.env.example` in the Vercel project settings (Production + Preview as needed).
+3. Deploy with `vercel --prod` **only when logged in** (`vercel whoami`). Do **not** run `vercel --yes` unattended if auth fails — leave deploy as a human step.
+
+### 2. Attach domains on Vercel
+
+In **Project → Settings → Domains**, add:
+
+| Domain | Role |
+| --- | --- |
+| `kmapolyclinic.com.tr` | Primary (canonical) |
+| `www.kmapolyclinic.com.tr` | Redirects via `vercel.json` → apex `.com.tr` |
+| `kmapolyclinic.tr` | Redirects via `vercel.json` → apex `.com.tr` |
+| `www.kmapolyclinic.tr` | Redirects via `vercel.json` → apex `.com.tr` |
+
+Confirm Vercel shows each domain as **Valid** after DNS propagates.
+
+### 3. DNS at the registrar
+
+Point each domain’s DNS at Vercel (values shown in the Domains UI; typically):
+
+| Type | Host | Value |
+| --- | --- | --- |
+| `A` | `@` | `76.76.21.21` (Vercel apex; confirm in dashboard) |
+| `CNAME` | `www` | `cname.vercel-dns.com` (or the exact target Vercel shows) |
+
+Repeat for both `.com.tr` and `.tr` zones. Wait for propagation, then hard-refresh Domain status.
+
+### 4. Smoke checks after live deploy
+
+1. `https://kmapolyclinic.com.tr/tr` loads.
+2. `https://kmapolyclinic.tr/…` and `https://www.kmapolyclinic.com.tr/…` 308/301 to `https://kmapolyclinic.com.tr/…`.
+3. `/fa` and `/ar` have `dir="rtl"`; `/en` and `/tr` are LTR.
+4. WhatsApp numbers differ by locale (`fa` vs others).
+5. Contact form returns 200 when `RESEND_API_KEY` is set.
 
 NAP / controller contact: **KMA PolyClinic**, Torun Center address in `src/lib/nap.ts`, email `info@kmapolyclinic.com.tr`.
