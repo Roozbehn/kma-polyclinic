@@ -1,4 +1,5 @@
 import { Link } from "@/i18n/navigation";
+import { Reveal } from "@/components/motion/Reveal";
 
 export type DepartmentGridItem = {
   slug: string;
@@ -22,14 +23,14 @@ export function DepartmentGrid({ items, heading }: DepartmentGridProps) {
       <h2 id="department-grid-heading" className="brand-display section-heading">
         {heading}
       </h2>
-      <ul className="department-grid__list">
+      <ul className="department-grid__list reveal-stagger">
         {sorted.map((item) => (
-          <li key={item.slug}>
+          <Reveal key={item.slug} as="li">
             <Link href={`/departments/${item.slug}`} className="department-grid__link">
               <span className="department-grid__title">{item.title}</span>
               <span className="department-grid__summary">{item.summary}</span>
             </Link>
-          </li>
+          </Reveal>
         ))}
       </ul>
     </section>
