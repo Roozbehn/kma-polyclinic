@@ -1,7 +1,7 @@
 import { NAP } from "./nap";
 
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://kmapolyclinic.com.tr";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://kmapoliklinik.com.tr";
 
 export function medicalClinicJsonLd(siteUrl: string) {
   return {

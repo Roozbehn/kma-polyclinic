@@ -7,9 +7,9 @@
 - Name: KMA PolyClinic
 - Address: Fulya Mah. Büyükdere Cad. Torun Center A Blok No:74A — İç Kapı No:10, Istanbul, TR
 - Phone: +90 212 680 79 00
-- Email: info@kmapolyclinic.com.tr
+- Email: info@kmapoliklinik.com.tr
 - Hours: Monday–Saturday 11:00–19:00
-- Website: https://kmapolyclinic.com.tr
+- Website: https://kmapoliklinik.com.tr
 - Languages: Turkish (tr), English (en), Persian (fa), Arabic (ar)
 
 ## Departments

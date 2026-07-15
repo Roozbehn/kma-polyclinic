@@ -66,7 +66,7 @@ const mvpLegal: Record<AppLocale, LegalBundle> = {
         {
           heading: "Site kullanımı",
           paragraphs: [
-            "kmapolyclinic.com.tr ve ilişkili sayfalar KMA PolyClinic tarafından bilgilendirme amacıyla sunulur. Site içeriği tıbbi teşhis veya bireysel tedavi tavsiyesi yerine geçmez; klinik kararlar yalnızca yüz yüze değerlendirme sonrası verilir.",
+            "kmapoliklinik.com.tr ve ilişkili sayfalar KMA PolyClinic tarafından bilgilendirme amacıyla sunulur. Site içeriği tıbbi teşhis veya bireysel tedavi tavsiyesi yerine geçmez; klinik kararlar yalnızca yüz yüze değerlendirme sonrası verilir.",
             controllerLine.tr,
           ],
         },
@@ -140,7 +140,7 @@ const mvpLegal: Record<AppLocale, LegalBundle> = {
         {
           heading: "Website use",
           paragraphs: [
-            "kmapolyclinic.com.tr and related pages are provided by KMA PolyClinic for informational purposes. Content is not a medical diagnosis or personal treatment advice; clinical decisions follow in-person assessment.",
+            "kmapoliklinik.com.tr and related pages are provided by KMA PolyClinic for informational purposes. Content is not a medical diagnosis or personal treatment advice; clinical decisions follow in-person assessment.",
             controllerLine.en,
           ],
         },
@@ -214,7 +214,7 @@ const mvpLegal: Record<AppLocale, LegalBundle> = {
         {
           heading: "استفاده از وب‌سایت",
           paragraphs: [
-            "kmapolyclinic.com.tr و صفحات مرتبط توسط KMA PolyClinic برای اطلاع‌رسانی ارائه می‌شود. محتوا جایگزین تشخیص پزشکی یا توصیه درمانی فردی نیست؛ تصمیم بالینی پس از ارزیابی حضوری گرفته می‌شود.",
+            "kmapoliklinik.com.tr و صفحات مرتبط توسط KMA PolyClinic برای اطلاع‌رسانی ارائه می‌شود. محتوا جایگزین تشخیص پزشکی یا توصیه درمانی فردی نیست؛ تصمیم بالینی پس از ارزیابی حضوری گرفته می‌شود.",
             controllerLine.fa,
           ],
         },
@@ -288,7 +288,7 @@ const mvpLegal: Record<AppLocale, LegalBundle> = {
         {
           heading: "استخدام الموقع",
           paragraphs: [
-            "يُقدَّم موقع kmapolyclinic.com.tr والصفحات المرتبطة من KMA PolyClinic لأغراض إعلامية. المحتوى ليس تشخيصًا طبيًا أو نصيحة علاجية فردية؛ القرارات السريرية تتم بعد تقييم حضوري.",
+            "يُقدَّم موقع kmapoliklinik.com.tr والصفحات المرتبطة من KMA PolyClinic لأغراض إعلامية. المحتوى ليس تشخيصًا طبيًا أو نصيحة علاجية فردية؛ القرارات السريرية تتم بعد تقييم حضوري.",
             controllerLine.ar,
           ],
         },

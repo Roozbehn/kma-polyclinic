@@ -2,20 +2,8 @@
   "redirects": [
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "kmapolyclinic.tr" }],
-      "destination": "https://kmapolyclinic.com.tr/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.kmapolyclinic.tr" }],
-      "destination": "https://kmapolyclinic.com.tr/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.kmapolyclinic.com.tr" }],
-      "destination": "https://kmapolyclinic.com.tr/:path*",
+      "has": [{ "type": "host", "value": "www.kmapoliklinik.com.tr" }],
+      "destination": "https://kmapoliklinik.com.tr/:path*",
       "permanent": true
     }
   ]

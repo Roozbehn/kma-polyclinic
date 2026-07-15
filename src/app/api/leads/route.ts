@@ -29,8 +29,8 @@ export async function POST(req: NextRequest) {
   }
 
   const resend = new Resend(resendKey);
-  const to = process.env.LEADS_TO_EMAIL || "info@kmapolyclinic.com.tr";
-  const from = process.env.LEADS_FROM_EMAIL || "noreply@kmapolyclinic.com.tr";
+  const to = process.env.LEADS_TO_EMAIL || "info@kmapoliklinik.com.tr";
+  const from = process.env.LEADS_FROM_EMAIL || "noreply@kmapoliklinik.com.tr";
 
   await resend.emails.send({
     from,

@@ -22,13 +22,13 @@ Sanity Studio (same app): [http://localhost:3000/studio](http://localhost:3000/s
 
 | Variable | Purpose |
 | --- | --- |
-| `NEXT_PUBLIC_SITE_URL` | Canonical site URL (e.g. `https://kmapolyclinic.com.tr`) |
+| `NEXT_PUBLIC_SITE_URL` | Canonical site URL (e.g. `https://kmapoliklinik.com.tr`) |
 | `NEXT_PUBLIC_SANITY_PROJECT_ID` | Sanity project ID |
 | `NEXT_PUBLIC_SANITY_DATASET` | Dataset (default `production`) |
 | `SANITY_API_READ_TOKEN` | Optional read token for private drafts |
 | `SANITY_API_WRITE_TOKEN` | Optional write token (studio / seed) |
 | `RESEND_API_KEY` | Contact form email via Resend |
-| `LEADS_TO_EMAIL` | Lead inbox (default `info@kmapolyclinic.com.tr`) |
+| `LEADS_TO_EMAIL` | Lead inbox (default `info@kmapoliklinik.com.tr`) |
 | `LEADS_FROM_EMAIL` | From address for lead mail |
 
 Without Sanity IDs, department/service/gallery queries fall back to MVP static content. Without Resend, the leads API should still rate-limit and reject/fail gracefully (see tests).
@@ -83,7 +83,7 @@ Until CMS is populated, `getDepartmentsForLocale` / `getPriorityServicesForLocal
 
 ## Deploy (Vercel)
 
-`vercel.json` permanently redirects apex/`www` on `.tr` and `www` on `.com.tr` to `https://kmapolyclinic.com.tr/:path*`.
+`vercel.json` permanently redirects `www.kmapoliklinik.com.tr` → `https://kmapoliklinik.com.tr/:path*`.
 
 ### 1. Project + env
 
@@ -97,30 +97,28 @@ In **Project → Settings → Domains**, add:
 
 | Domain | Role |
 | --- | --- |
-| `kmapolyclinic.com.tr` | Primary (canonical) |
-| `www.kmapolyclinic.com.tr` | Redirects via `vercel.json` → apex `.com.tr` |
-| `kmapolyclinic.tr` | Redirects via `vercel.json` → apex `.com.tr` |
-| `www.kmapolyclinic.tr` | Redirects via `vercel.json` → apex `.com.tr` |
+| `kmapoliklinik.com.tr` | Primary (canonical) — only custom domain |
+| `www.kmapoliklinik.com.tr` | Optional; redirects via `vercel.json` → apex |
 
-Confirm Vercel shows each domain as **Valid** after DNS propagates.
+Confirm Vercel shows the domain as **Valid** after DNS propagates.
 
 ### 3. DNS at the registrar
 
-Point each domain’s DNS at Vercel (values shown in the Domains UI; typically):
+Point DNS at Vercel (values shown in the Domains UI; typically):
 
 | Type | Host | Value |
 | --- | --- | --- |
 | `A` | `@` | `76.76.21.21` (Vercel apex; confirm in dashboard) |
 | `CNAME` | `www` | `cname.vercel-dns.com` (or the exact target Vercel shows) |
 
-Repeat for both `.com.tr` and `.tr` zones. Wait for propagation, then hard-refresh Domain status.
+Wait for propagation, then hard-refresh Domain status.
 
 ### 4. Smoke checks after live deploy
 
-1. `https://kmapolyclinic.com.tr/tr` loads.
-2. `https://kmapolyclinic.tr/…` and `https://www.kmapolyclinic.com.tr/…` 308/301 to `https://kmapolyclinic.com.tr/…`.
+1. `https://kmapoliklinik.com.tr/tr` loads.
+2. `https://www.kmapoliklinik.com.tr/…` 301/308 to `https://kmapoliklinik.com.tr/…` (if www is configured).
 3. `/fa` and `/ar` have `dir="rtl"`; `/en` and `/tr` are LTR.
 4. WhatsApp numbers differ by locale (`fa` vs others).
 5. Contact form returns 200 when `RESEND_API_KEY` is set.
 
-NAP / controller contact: **KMA PolyClinic**, Torun Center address in `src/lib/nap.ts`, email `info@kmapolyclinic.com.tr`.
+NAP / controller contact: **KMA PolyClinic**, Torun Center address in `src/lib/nap.ts`, email `info@kmapoliklinik.com.tr`.

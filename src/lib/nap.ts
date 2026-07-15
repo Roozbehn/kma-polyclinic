@@ -1,7 +1,7 @@
 export const NAP = {
   phoneDisplay: "+90 212 680 79 00",
   phoneTel: "+902126807900",
-  email: "info@kmapolyclinic.com.tr",
+  email: "info@kmapoliklinik.com.tr",
   streetAddress: "Fulya Mah. Büyükdere Cad. Torun Center A Blok No:74A — İç Kapı No:10",
   addressLocality: "Istanbul",
   addressCountry: "TR",
