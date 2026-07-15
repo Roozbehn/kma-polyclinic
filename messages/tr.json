@@ -20,5 +20,35 @@
     "priorityServices": "Öncelikli tedaviler",
     "departments": "Bölümler"
   },
+  "about": {
+    "brand": "KMA PolyClinic",
+    "title": "Sakin ve özenli bakım için bir poliklinik",
+    "lead": "KMA PolyClinic, Kimia Estetik’ten büyüyerek Torun Center’da çok branşlı özel bir kliniğe dönüştü — aynı samimiyet, daha geniş bir kapsam.",
+    "storyHeading": "Hikâyemiz",
+    "story": "Odaklı bir estetik pratikle başlayan yolculuk, KMA PolyClinic’e dönüştü: dermatoloji, diş hekimliği, plastik cerrahi, saç ve kaş restorasyonu ile medikal wellness tek çatı altında. Kişisel ilgi standardını koruyarak tıbbi yelpazeyi genişlettik.",
+    "trustHeading": "Gürültüsüz güven",
+    "trust": "Hastalarımız ölçülü öneriler, diller arası net iletişim ve tanıtımdan uzak özel bir ortam için bizi tercih ediyor. Tedavi planları aceleye getirilmez.",
+    "positionHeading": "Poliklinik konumlandırması",
+    "position": "Tek prosedürlük bir butik değiliz. KMA, Quiet Luxury bir polikliniktir: estetik odaklı, tıbbi temelli ve klinik beceri kadar dinginlik de arayan konuklar için tasarlandı."
+  },
+  "gallery": {
+    "title": "Galeri"
+  },
+  "contact": {
+    "title": "Randevu alın",
+    "support": "Kısa bilgilerinizi bırakın, ekibimiz size dönüş yapsın. Mesaj tercih ederseniz her sayfadan WhatsApp kullanabilirsiniz.",
+    "name": "Ad soyad",
+    "phone": "Telefon",
+    "email": "E-posta (isteğe bağlı)",
+    "department": "Bölüm (isteğe bağlı)",
+    "departmentPlaceholder": "Bölüm seçin",
+    "message": "Mesaj",
+    "submit": "Talebi gönder",
+    "sending": "Gönderiliyor…",
+    "success": "Teşekkürler — talebinizi aldık, en kısa sürede dönüş yapacağız.",
+    "error": "Talebiniz gönderilemedi. Lütfen tekrar deneyin veya bizi arayın.",
+    "napHeading": "Ziyaret ve iletişim",
+    "mapTitle": "Google Haritalarda KMA PolyClinic — Torun Center"
+  },
   "whatsappPrefill": "Merhaba, KMA PolyClinic'ten randevu almak istiyorum."
 }

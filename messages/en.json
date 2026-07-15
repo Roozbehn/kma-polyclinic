@@ -20,5 +20,35 @@
     "priorityServices": "Priority treatments",
     "departments": "Departments"
   },
+  "about": {
+    "brand": "KMA PolyClinic",
+    "title": "A polyclinic built for calm, considered care",
+    "lead": "KMA PolyClinic grew from Kimia Estetik into a multi-specialty private clinic in Torun Center, Istanbul — still intimate, now broader.",
+    "storyHeading": "Our story",
+    "story": "What began as a focused aesthetics practice matured into KMA PolyClinic: dermatology, dentistry, plastic surgery, hair and eyebrow restoration, and medical wellness under one discreet roof. We kept the same standard of personal attention while expanding the medicine around it.",
+    "trustHeading": "Trust, without noise",
+    "trust": "Patients choose us for measured recommendations, clear communication across languages, and a setting that feels private rather than promotional. Care plans are paced — never rushed into trends.",
+    "positionHeading": "Polyclinic positioning",
+    "position": "We are not a single-procedure boutique. KMA is a Quiet Luxury polyclinic: aesthetics-led, medically grounded, and designed for guests who value composure as much as clinical skill."
+  },
+  "gallery": {
+    "title": "Gallery"
+  },
+  "contact": {
+    "title": "Book an appointment",
+    "support": "Share a few details and our team will follow up. Prefer messaging? Use WhatsApp from any page.",
+    "name": "Full name",
+    "phone": "Phone",
+    "email": "Email (optional)",
+    "department": "Department (optional)",
+    "departmentPlaceholder": "Select a department",
+    "message": "Message",
+    "submit": "Send request",
+    "sending": "Sending…",
+    "success": "Thank you — we received your request and will be in touch soon.",
+    "error": "We could not send your request. Please try again or call us.",
+    "napHeading": "Visit & reach us",
+    "mapTitle": "KMA PolyClinic on Google Maps — Torun Center"
+  },
   "whatsappPrefill": "Hello, I would like to book an appointment at KMA PolyClinic."
 }
