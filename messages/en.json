@@ -50,5 +50,9 @@
     "napHeading": "Visit & reach us",
     "mapTitle": "KMA PolyClinic on Google Maps — Torun Center"
   },
-  "whatsappPrefill": "Hello, I would like to book an appointment at KMA PolyClinic."
+  "whatsappPrefill": "Hello, I would like to book an appointment at KMA PolyClinic.",
+  "legal": {
+    "privacy": "Privacy",
+    "terms": "Terms"
+  }
 }

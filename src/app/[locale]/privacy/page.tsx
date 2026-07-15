@@ -1,5 +1,7 @@
 import { setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
+import { LegalDocument } from "@/components/LegalDocument";
+import { getMvpLegal } from "@/lib/mvp-legal";
 import { localeLanguageAlternates } from "@/lib/schema-org";
 
 export async function generateMetadata({
@@ -8,8 +10,9 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
+  const document = getMvpLegal(locale, "privacy");
   return {
-    title: "Privacy Policy | KMA PolyClinic",
+    title: `${document.title} | KMA PolyClinic`,
     alternates: {
       canonical: `/${locale}/privacy`,
       languages: localeLanguageAlternates("/privacy"),
@@ -24,11 +27,5 @@ export default async function PrivacyPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-
-  return (
-    <main className="legal-page">
-      <h1>Privacy Policy</h1>
-      <p>Full privacy policy copy will be added in a follow-up release.</p>
-    </main>
-  );
+  return <LegalDocument document={getMvpLegal(locale, "privacy")} />;
 }

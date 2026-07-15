@@ -1,5 +1,7 @@
 import { setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
+import { LegalDocument } from "@/components/LegalDocument";
+import { getMvpLegal } from "@/lib/mvp-legal";
 import { localeLanguageAlternates } from "@/lib/schema-org";
 
 export async function generateMetadata({
@@ -8,8 +10,9 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
+  const document = getMvpLegal(locale, "terms");
   return {
-    title: "Terms of Use | KMA PolyClinic",
+    title: `${document.title} | KMA PolyClinic`,
     alternates: {
       canonical: `/${locale}/terms`,
       languages: localeLanguageAlternates("/terms"),
@@ -24,11 +27,5 @@ export default async function TermsPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-
-  return (
-    <main className="legal-page">
-      <h1>Terms of Use</h1>
-      <p>Full terms of use copy will be added in a follow-up release.</p>
-    </main>
-  );
+  return <LegalDocument document={getMvpLegal(locale, "terms")} />;
 }

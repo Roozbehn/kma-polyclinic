@@ -50,5 +50,9 @@
     "napHeading": "مراجعه و تماس",
     "mapTitle": "KMA PolyClinic در گوگل مپ — تورون سنتر"
   },
-  "whatsappPrefill": "سلام، می‌خواهم از کلینیک KMA PolyClinic نوبت بگیرم."
+  "whatsappPrefill": "سلام، می‌خواهم از کلینیک KMA PolyClinic نوبت بگیرم.",
+  "legal": {
+    "privacy": "حریم خصوصی",
+    "terms": "شرایط"
+  }
 }

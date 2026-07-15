@@ -189,3 +189,6 @@ export async function getServiceBySlugForLocale(locale: string, slug: string) {
   const key = isAppLocale(locale) ? locale : "tr";
   return mvpContent[key].priorityServices.find((s) => s.slug === slug) ?? null;
 }
+
+export { getMvpLegal } from "@/lib/mvp-legal";
+export type { LegalKey, MvpLegalPage, MvpLegalSection } from "@/lib/mvp-legal";

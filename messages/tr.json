@@ -50,5 +50,9 @@
     "napHeading": "Ziyaret ve iletişim",
     "mapTitle": "Google Haritalarda KMA PolyClinic — Torun Center"
   },
-  "whatsappPrefill": "Merhaba, KMA PolyClinic'ten randevu almak istiyorum."
+  "whatsappPrefill": "Merhaba, KMA PolyClinic'ten randevu almak istiyorum.",
+  "legal": {
+    "privacy": "Gizlilik",
+    "terms": "Koşullar"
+  }
 }

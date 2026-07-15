@@ -1,7 +1,9 @@
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { NAP } from "@/lib/nap";
 
-export function SiteFooter() {
+export async function SiteFooter() {
+  const t = await getTranslations("legal");
   const hoursLabel = `${NAP.hours.days[0]}–${NAP.hours.days[NAP.hours.days.length - 1]} ${NAP.hours.opens}–${NAP.hours.closes}`;
 
   return (
@@ -28,8 +30,8 @@ export function SiteFooter() {
         </a>
       </div>
       <div className="site-footer__legal">
-        <Link href="/privacy">Privacy</Link>
-        <Link href="/terms">Terms</Link>
+        <Link href="/privacy">{t("privacy")}</Link>
+        <Link href="/terms">{t("terms")}</Link>
       </div>
     </footer>
   );
