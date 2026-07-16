@@ -5,6 +5,12 @@ export const department = defineType({
   title: "Department",
   type: "document",
   fields: [
+    defineField({
+      name: "language",
+      type: "string",
+      readOnly: true,
+      hidden: true,
+    }),
     defineField({ name: "title", type: "string", validation: (r) => r.required() }),
     defineField({
       name: "slug",
@@ -13,6 +19,12 @@ export const department = defineType({
       validation: (r) => r.required(),
     }),
     defineField({ name: "summary", type: "text" }),
+    defineField({
+      name: "body",
+      type: "array",
+      of: [{ type: "block" }],
+      description: "Long-form department page content (paragraphs).",
+    }),
     defineField({ name: "heroImage", type: "image", options: { hotspot: true } }),
     defineField({
       name: "faOnly",

@@ -10,7 +10,7 @@
   --color-sage-dark: #5f6f5c;
   --color-paper: #f3efe9;
   --font-display: "Fraunces", Georgia, serif;
-  --font-sans: "Satoshi", "DM Sans", system-ui, sans-serif;
+  --font-sans: "Satoshi", "DM Sans", "Noto Sans Arabic", system-ui, sans-serif;
   --space-section: clamp(4rem, 8vw, 7rem);
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -21,9 +21,14 @@ html {
 }
 
 body {
-  font-family: var(--font-sans);
+  font-family: var(--font-arabic), var(--font-sans);
   line-height: 1.6;
   margin: 0;
+}
+
+html[lang="tr"] body,
+html[lang="en"] body {
+  font-family: var(--font-sans);
 }
 
 .brand-display {
@@ -69,12 +74,15 @@ body {
 }
 
 .site-header {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
   padding: 1.25rem clamp(1.25rem, 4vw, 3rem);
   border-bottom: 1px solid var(--color-stone-200);
+  background: color-mix(in srgb, var(--color-paper) 92%, transparent);
+  backdrop-filter: blur(8px);
 }
 
 .site-header__logo {
@@ -89,13 +97,54 @@ body {
   font-size: 0.95rem;
 }
 
-.site-header__nav a {
+.site-header__nav a,
+.site-header__drawer a {
   color: var(--color-ink);
   text-decoration: none;
 }
 
-.site-header__nav a:hover {
+.site-header__nav a:hover,
+.site-header__drawer a:hover {
   color: var(--color-sage-dark);
+}
+
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.site-header__menu-btn {
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--color-ink);
+  background: transparent;
+  border: 1px solid var(--color-stone-200);
+  padding: 0.4rem 0.75rem;
+  cursor: pointer;
+}
+
+.site-header__drawer {
+  position: absolute;
+  inset-inline: 0;
+  top: 100%;
+  z-index: 40;
+  display: grid;
+  gap: 0.25rem;
+  padding: 1rem clamp(1.25rem, 4vw, 3rem) 1.25rem;
+  background: var(--color-paper);
+  border-bottom: 1px solid var(--color-stone-200);
+  box-shadow: 0 12px 30px color-mix(in srgb, var(--color-ink) 6%, transparent);
+}
+
+.site-header__drawer[hidden] {
+  display: none;
+}
+
+.site-header__drawer a {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--color-stone-200);
+  font-size: 1.05rem;
 }
 
 .site-header select {
@@ -137,35 +186,56 @@ body {
 
 .brand-hero {
   position: relative;
-  min-height: min(92vh, 52rem);
+  min-height: min(94vh, 54rem);
   display: grid;
   align-items: end;
   padding: clamp(3rem, 8vw, 6rem) clamp(1.25rem, 4vw, 3rem);
   color: var(--color-ink);
-  background:
-    radial-gradient(ellipse 80% 60% at 20% 30%, color-mix(in srgb, var(--color-sage) 22%, transparent), transparent 55%),
-    linear-gradient(160deg, var(--color-stone-50) 0%, var(--color-paper) 45%, #e8e2d8 100%);
   overflow: hidden;
+  isolation: isolate;
+}
+
+.brand-hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 70% 55% at 75% 35%, color-mix(in srgb, var(--color-sage) 28%, transparent), transparent 60%),
+    radial-gradient(ellipse 55% 45% at 15% 80%, color-mix(in srgb, #c4b5a5 35%, transparent), transparent 55%),
+    linear-gradient(155deg, #f7f4ef 0%, var(--color-paper) 42%, #ddd6cb 100%);
+  transform: scale(1.03);
+  animation: hero-media 22s var(--ease-out) infinite alternate;
+}
+
+.brand-hero__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--color-paper) 88%, transparent) 0%, color-mix(in srgb, var(--color-paper) 35%, transparent) 48%, transparent 72%),
+    linear-gradient(0deg, color-mix(in srgb, var(--color-paper) 70%, transparent) 0%, transparent 42%);
 }
 
 .brand-hero__veil {
   position: absolute;
   inset: 0;
+  z-index: 1;
   background-image:
     repeating-linear-gradient(
       -12deg,
       transparent,
       transparent 11px,
-      color-mix(in srgb, var(--color-sage) 6%, transparent) 11px,
-      color-mix(in srgb, var(--color-sage) 6%, transparent) 12px
+      color-mix(in srgb, var(--color-sage) 7%, transparent) 11px,
+      color-mix(in srgb, var(--color-sage) 7%, transparent) 12px
     );
-  opacity: 0.55;
+  opacity: 0.45;
   pointer-events: none;
   animation: hero-veil 18s var(--ease-out) infinite alternate;
 }
 
 .brand-hero__content {
   position: relative;
+  z-index: 2;
   max-width: 36rem;
   display: grid;
   gap: 1rem;
@@ -215,6 +285,26 @@ body {
   animation: hero-rise 700ms var(--ease-out) both;
 }
 
+.content-page--visual {
+  max-width: 52rem;
+}
+
+.content-page__hero {
+  margin: calc(var(--space-section) * -0.35) calc(-1 * clamp(1.25rem, 4vw, 3rem)) 0.5rem;
+  width: calc(100% + 2 * clamp(1.25rem, 4vw, 3rem));
+  max-height: min(48vh, 28rem);
+  overflow: hidden;
+  background: var(--color-stone-200);
+}
+
+.content-page__hero-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: hero-media 20s var(--ease-out) infinite alternate;
+}
+
 .content-page__title {
   margin: 0;
   font-size: clamp(2rem, 4vw, 2.75rem);
@@ -225,6 +315,17 @@ body {
   margin: 0;
   color: var(--color-ink-muted);
   font-size: 1.05rem;
+}
+
+.content-page__body {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.content-page__body p {
+  margin: 0;
+  color: var(--color-ink-muted);
+  font-size: 1.02rem;
 }
 
 .service-highlight,
@@ -299,6 +400,15 @@ body {
   }
 }
 
+@keyframes hero-media {
+  from {
+    transform: scale(1.02) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.06) translate3d(-1.2%, 0.8%, 0);
+  }
+}
+
 .about-page {
   padding: var(--space-section) clamp(1.25rem, 4vw, 3rem);
   display: grid;
@@ -367,6 +477,24 @@ body {
   aspect-ratio: 4 / 3;
   width: 100%;
   background-color: var(--color-stone-200);
+  overflow: hidden;
+}
+
+.gallery-strip__visual--photo {
+  position: relative;
+}
+
+.gallery-strip__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-strip__empty {
+  margin: 0;
+  color: var(--color-ink-muted);
+  max-width: 32rem;
 }
 
 .gallery-strip__tag {
@@ -543,6 +671,11 @@ body {
 @media (min-width: 900px) {
   .site-header__nav {
     display: flex;
+  }
+
+  .site-header__menu-btn,
+  .site-header__drawer {
+    display: none;
   }
 
   .site-footer {

@@ -38,7 +38,7 @@ async function fetchOrEmpty<T>(
 export async function getDepartments(locale: string) {
   return fetchOrEmpty(
     `*[_type == "department" && language == $locale && (!faOnly || $locale == "fa")]|order(navPriority asc){
-      title, summary, faOnly, navPriority, "slug": slug.current, heroImage
+      title, summary, body, faOnly, navPriority, "slug": slug.current, heroImage
     }`,
     { locale },
     [],
@@ -48,7 +48,7 @@ export async function getDepartments(locale: string) {
 export async function getDepartmentBySlug(locale: string, slug: string) {
   return fetchOrEmpty(
     `*[_type == "department" && language == $locale && slug.current == $slug && (!faOnly || $locale == "fa")][0]{
-      title, summary, faOnly, navPriority, "slug": slug.current, heroImage
+      title, summary, body, faOnly, navPriority, "slug": slug.current, heroImage
     }`,
     { locale, slug },
     null,
@@ -58,11 +58,31 @@ export async function getDepartmentBySlug(locale: string, slug: string) {
 export async function getPriorityServices(locale: string) {
   return fetchOrEmpty(
     `*[_type == "service" && language == $locale && priority == true]|order(title asc){
-      title, summary, "slug": slug.current, seoTitle, seoDescription,
+      title, summary, body, "slug": slug.current, seoTitle, seoDescription,
       "department": department->{ title, "slug": slug.current }
     }`,
     { locale },
     [],
+  );
+}
+
+export async function getServiceBySlug(locale: string, slug: string) {
+  return fetchOrEmpty<{
+    title: string;
+    summary?: string;
+    body?: unknown;
+    priority?: boolean;
+    slug: string;
+    seoTitle?: string;
+    seoDescription?: string;
+    department?: { title?: string; slug?: string };
+  } | null>(
+    `*[_type == "service" && language == $locale && slug.current == $slug][0]{
+      title, summary, body, priority, "slug": slug.current, seoTitle, seoDescription,
+      "department": department->{ title, "slug": slug.current }
+    }`,
+    { locale, slug },
+    null,
   );
 }
 
@@ -76,23 +96,30 @@ export async function getPage(locale: string, key: string) {
   );
 }
 
+export async function getLegal(locale: string, key: string) {
+  return fetchOrEmpty<{ key: string; title?: string; body?: unknown } | null>(
+    `*[_type == "legalPage" && language == $locale && key == $key][0]{
+      key, title, body
+    }`,
+    { locale, key },
+    null,
+  );
+}
+
 export async function getGallery(locale: string) {
-  return fetchOrEmpty(
+  return fetchOrEmpty<
+    Array<{
+      title?: string;
+      beforeAfter?: boolean;
+      image?: unknown;
+      department?: { title?: string; slug?: string };
+    }>
+  >(
     `*[_type == "galleryItem" && language == $locale]|order(_createdAt desc){
       title, image, beforeAfter,
       "department": department->{ title, "slug": slug.current }
     }`,
     { locale },
     [],
-  );
-}
-
-export async function getLegal(locale: string, key: string) {
-  return fetchOrEmpty(
-    `*[_type == "legalPage" && language == $locale && key == $key][0]{
-      key, title, body
-    }`,
-    { locale, key },
-    null,
   );
 }

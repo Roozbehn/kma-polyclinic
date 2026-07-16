@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { LocaleSwitcher } from "@/components/LocaleSwitcher";
@@ -16,6 +17,7 @@ const NAV = [
 
 export function SiteHeader() {
   const t = useTranslations("nav");
+  const [open, setOpen] = useState(false);
 
   return (
     <header className="site-header">
@@ -29,7 +31,30 @@ export function SiteHeader() {
           </Link>
         ))}
       </nav>
-      <LocaleSwitcher />
+      <div className="site-header__actions">
+        <LocaleSwitcher />
+        <button
+          type="button"
+          className="site-header__menu-btn"
+          aria-expanded={open}
+          aria-controls="mobile-nav"
+          onClick={() => setOpen((v) => !v)}
+        >
+          {open ? t("close") : t("menu")}
+        </button>
+      </div>
+      <nav
+        id="mobile-nav"
+        className={open ? "site-header__drawer is-open" : "site-header__drawer"}
+        aria-label="Mobile"
+        hidden={!open}
+      >
+        {NAV.map((item) => (
+          <Link key={item.href} href={item.href} onClick={() => setOpen(false)}>
+            {t(item.key)}
+          </Link>
+        ))}
+      </nav>
     </header>
   );
 }

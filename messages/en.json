@@ -7,7 +7,9 @@
     "gallery": "Gallery",
     "contact": "Contact",
     "eyebrow": "Eyebrow Transplant",
-    "hair": "Hair Transplant"
+    "hair": "Hair Transplant",
+    "menu": "Menu",
+    "close": "Close"
   },
   "cta": {
     "whatsapp": "WhatsApp",
@@ -16,7 +18,7 @@
   },
   "home": {
     "headline": "Quiet care in the heart of Istanbul",
-    "support": "A private polyclinic for aesthetics, hair, and medical wellness.",
+    "support": "A private polyclinic for aesthetics, hair restoration, dermatology, dentistry, and medical wellness — discreetly based in Torun Center.",
     "priorityServices": "Priority treatments",
     "departments": "Departments"
   },
@@ -32,7 +34,17 @@
     "position": "We are not a single-procedure boutique. KMA is a Quiet Luxury polyclinic: aesthetics-led, medically grounded, and designed for guests who value composure as much as clinical skill."
   },
   "gallery": {
-    "title": "Gallery"
+    "title": "Gallery",
+    "support": "Clinical atmosphere and care spaces at KMA PolyClinic, Torun Center, Istanbul.",
+    "empty": "Gallery images will appear here as we publish new work from the clinic."
+  },
+  "services": {
+    "title": "Treatments",
+    "support": "Priority treatments at our Istanbul polyclinic — eyebrow and hair transplant, botox, fillers, and laser care."
+  },
+  "departmentsPage": {
+    "title": "Departments",
+    "support": "Multi-specialty care under one discreet roof: aesthetics, dermatology, dentistry, plastic surgery, hair, and eyebrows."
   },
   "contact": {
     "title": "Book an appointment",

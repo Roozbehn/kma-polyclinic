@@ -15,6 +15,7 @@ export async function BrandHero({ locale, headline, support }: BrandHeroProps) {
 
   return (
     <section className="brand-hero" aria-labelledby="brand-hero-title">
+      <div className="brand-hero__media" aria-hidden="true" />
       <div className="brand-hero__veil" aria-hidden="true" />
       <div className="brand-hero__content">
         <p id="brand-hero-title" className="brand-display brand-hero__brand">

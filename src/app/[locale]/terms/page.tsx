@@ -1,8 +1,8 @@
 import { setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
 import { LegalDocument } from "@/components/LegalDocument";
-import { getMvpLegal } from "@/lib/mvp-legal";
-import { localeLanguageAlternates } from "@/lib/schema-org";
+import { getLegalForLocale } from "@/lib/legal-content";
+import { pageMetadata } from "@/lib/seo";
 
 export async function generateMetadata({
   params,
@@ -10,14 +10,13 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const document = getMvpLegal(locale, "terms");
-  return {
+  const document = await getLegalForLocale(locale, "terms");
+  return pageMetadata({
+    locale,
+    path: "/terms",
     title: `${document.title} | KMA PolyClinic`,
-    alternates: {
-      canonical: `/${locale}/terms`,
-      languages: localeLanguageAlternates("/terms"),
-    },
-  };
+    description: document.sections[0]?.paragraphs[0] || document.title,
+  });
 }
 
 export default async function TermsPage({
@@ -27,5 +26,5 @@ export default async function TermsPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  return <LegalDocument document={getMvpLegal(locale, "terms")} />;
+  return <LegalDocument document={await getLegalForLocale(locale, "terms")} />;
 }

@@ -5,6 +5,7 @@ export const service = defineType({
   title: "Service",
   type: "document",
   fields: [
+    defineField({ name: "language", type: "string", readOnly: true, hidden: true }),
     defineField({ name: "title", type: "string", validation: (r) => r.required() }),
     defineField({
       name: "slug",

@@ -11,11 +11,17 @@ const HOME_SLUGS = new Set(["eyebrow-transplant", "hair-transplant", "botox"]);
 type ServiceHighlightProps = {
   items: ServiceHighlightItem[];
   heading: string;
+  /** When true, list all items (services index). Home keeps priority subset. */
+  showAll?: boolean;
 };
 
-export function ServiceHighlight({ items, heading }: ServiceHighlightProps) {
-  const selected = items.filter((item) => HOME_SLUGS.has(item.slug));
-  const list = selected.length > 0 ? selected : items.slice(0, 3);
+export function ServiceHighlight({ items, heading, showAll = false }: ServiceHighlightProps) {
+  const list = showAll
+    ? items
+    : (() => {
+        const selected = items.filter((item) => HOME_SLUGS.has(item.slug));
+        return selected.length > 0 ? selected : items.slice(0, 3);
+      })();
 
   return (
     <section className="service-highlight" aria-labelledby="service-highlight-heading">

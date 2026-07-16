@@ -3,11 +3,34 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
+const studioFrameAncestors =
+  "frame-ancestors 'self' https://www.sanity.io https://*.sanity.io https://*.sanity.work https://*.sanity.build";
+
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "cdn.sanity.io" },
     ],
+  },
+  async headers() {
+    return [
+      {
+        source: "/studio",
+        headers: [{ key: "Content-Security-Policy", value: studioFrameAncestors }],
+      },
+      {
+        source: "/studio/:path*",
+        headers: [{ key: "Content-Security-Policy", value: studioFrameAncestors }],
+      },
+      {
+        source: "/((?!studio).*)",
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+        ],
+      },
+    ];
   },
 };
 

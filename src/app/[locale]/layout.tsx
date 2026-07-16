@@ -1,9 +1,8 @@
-import { Fraunces, DM_Sans } from "next/font/google";
+import { Fraunces, DM_Sans, Noto_Sans_Arabic } from "next/font/google";
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages, setRequestLocale } from "next-intl/server";
+import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { DocumentLang } from "@/components/DocumentLang";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { MetaPixel } from "@/components/MetaPixel";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -24,6 +23,13 @@ const dmSans = DM_Sans({
   display: "swap",
 });
 
+const notoArabic = Noto_Sans_Arabic({
+  subsets: ["arabic"],
+  variable: "--font-arabic",
+  display: "swap",
+  weight: ["400", "500", "600"],
+});
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
@@ -34,11 +40,21 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "home" });
   return {
     metadataBase: new URL(SITE_URL),
+    title: {
+      default: "KMA PolyClinic",
+      template: "%s | KMA PolyClinic",
+    },
+    description: t("support"),
     alternates: {
       canonical: `/${locale}`,
       languages: localeLanguageAlternates(""),
+    },
+    openGraph: {
+      siteName: "KMA PolyClinic",
+      type: "website",
     },
   };
 }
@@ -55,17 +71,19 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
   const messages = await getMessages();
   const dir = isRtlLocale(locale) ? "rtl" : "ltr";
+  const fontClass = `${fraunces.variable} ${dmSans.variable} ${notoArabic.variable}`;
 
   return (
-    <div lang={locale} dir={dir} className={`${fraunces.variable} ${dmSans.variable}`}>
-      <DocumentLang lang={locale} dir={dir} />
-      <MetaPixel />
-      <NextIntlClientProvider messages={messages}>
-        <SiteHeader />
-        {children}
-        <SiteFooter />
-        <FloatingWhatsApp />
-      </NextIntlClientProvider>
-    </div>
+    <html lang={locale} dir={dir} suppressHydrationWarning>
+      <body className={fontClass}>
+        <MetaPixel />
+        <NextIntlClientProvider messages={messages}>
+          <SiteHeader />
+          {children}
+          <SiteFooter />
+          <FloatingWhatsApp />
+        </NextIntlClientProvider>
+      </body>
+    </html>
   );
 }

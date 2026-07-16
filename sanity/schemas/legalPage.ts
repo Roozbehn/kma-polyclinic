@@ -5,6 +5,7 @@ export const legalPage = defineType({
   title: "Legal Page",
   type: "document",
   fields: [
+    defineField({ name: "language", type: "string", readOnly: true, hidden: true }),
     defineField({
       name: "key",
       type: "string",

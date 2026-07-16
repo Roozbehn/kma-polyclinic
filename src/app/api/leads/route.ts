@@ -5,6 +5,7 @@ import { sendMetaCapIEvent } from "@/lib/meta/capi";
 import { createMemoryRateLimiter } from "@/lib/rate-limit";
 
 const limiter = createMemoryRateLimiter({ limit: 5, windowMs: 60_000 });
+// Note: in-memory limiter is per-instance on serverless — not a global quota.
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";

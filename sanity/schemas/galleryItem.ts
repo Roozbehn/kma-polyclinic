@@ -5,6 +5,7 @@ export const galleryItem = defineType({
   title: "Gallery Item",
   type: "document",
   fields: [
+    defineField({ name: "language", type: "string", readOnly: true, hidden: true }),
     defineField({ name: "title", type: "string" }),
     defineField({
       name: "image",

@@ -7,7 +7,9 @@
     "gallery": "Galeri",
     "contact": "İletişim",
     "eyebrow": "Kaş Ekimi",
-    "hair": "Saç Ekimi"
+    "hair": "Saç Ekimi",
+    "menu": "Menü",
+    "close": "Kapat"
   },
   "cta": {
     "whatsapp": "WhatsApp",
@@ -16,7 +18,7 @@
   },
   "home": {
     "headline": "İstanbul’un kalbinde sakin bir bakım",
-    "support": "Estetik, saç ve medikal wellness için özel poliklinik.",
+    "support": "Estetik, saç restorasyonu, dermatoloji, diş hekimliği ve medikal wellness için özel poliklinik — Torun Center’da, sakin bir ortamda.",
     "priorityServices": "Öncelikli tedaviler",
     "departments": "Bölümler"
   },
@@ -32,7 +34,17 @@
     "position": "Tek prosedürlük bir butik değiliz. KMA, Quiet Luxury bir polikliniktir: estetik odaklı, tıbbi temelli ve klinik beceri kadar dinginlik de arayan konuklar için tasarlandı."
   },
   "gallery": {
-    "title": "Galeri"
+    "title": "Galeri",
+    "support": "KMA PolyClinic klinik atmosferi ve bakım alanları — Torun Center, İstanbul.",
+    "empty": "Yeni çalışmalar yayınlandıkça galeri görselleri burada görünecek."
+  },
+  "services": {
+    "title": "Tedaviler",
+    "support": "İstanbul polikliniğimizdeki öncelikli tedaviler — kaş ve saç ekimi, botoks, dolgu ve lazer."
+  },
+  "departmentsPage": {
+    "title": "Bölümler",
+    "support": "Tek çatı altında çok branşlı bakım: estetik, dermatoloji, diş hekimliği, plastik cerrahi, saç ve kaş."
   },
   "contact": {
     "title": "Randevu alın",
