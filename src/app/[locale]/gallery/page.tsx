@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { GalleryStrip, type GalleryCmsItem } from "@/components/GalleryStrip";
+import { JsonLd } from "@/components/JsonLd";
 import { getDepartmentsForLocale } from "@/lib/mvp-content";
 import { getGallery } from "@/lib/sanity";
 import { urlForImage } from "@/lib/sanity-image";
+import { breadcrumbJsonLd, SITE_URL, webPageJsonLd } from "@/lib/schema-org";
 import { pageMetadata } from "@/lib/seo";
 
 export async function generateMetadata({
@@ -12,12 +15,12 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "gallery" });
+  const t = await getTranslations({ locale, namespace: "seo" });
   return pageMetadata({
     locale,
     path: "/gallery",
-    title: `${t("title")} | KMA PolyClinic`,
-    description: t("support"),
+    title: t("galleryTitle"),
+    description: t("galleryDescription"),
   });
 }
 
@@ -28,8 +31,9 @@ export default async function GalleryPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations("gallery");
+  const t = await getTranslations();
   const raw = await getGallery(locale);
+  const url = `${SITE_URL}/${locale}/gallery`;
 
   let items: GalleryCmsItem[] = (raw ?? []).map(
     (
@@ -64,7 +68,6 @@ export default async function GalleryPage({
     },
   );
 
-  // MVP placeholders when CMS gallery is empty — department-themed tiles, not fake photos.
   if (items.length === 0) {
     const departments = await getDepartmentsForLocale(locale);
     items = departments.slice(0, 6).map((dept, index) => ({
@@ -79,10 +82,32 @@ export default async function GalleryPage({
 
   return (
     <main>
-      <p className="gallery-strip__support content-page__summary" style={{ paddingInline: "clamp(1.25rem, 4vw, 3rem)", marginBottom: 0, paddingTop: "var(--space-section)" }}>
-        {t("support")}
-      </p>
-      <GalleryStrip heading={t("title")} emptyLabel={t("empty")} items={items} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: t("breadcrumb.home"), path: `/${locale}` },
+          { name: t("gallery.title"), path: `/${locale}/gallery` },
+        ])}
+      />
+      <JsonLd
+        data={webPageJsonLd({
+          name: t("gallery.title"),
+          description: t("gallery.support"),
+          url,
+          locale,
+          type: "CollectionPage",
+        })}
+      />
+      <header className="content-page content-page--wide">
+        <Breadcrumbs
+          items={[
+            { name: t("breadcrumb.home"), href: "/" },
+            { name: t("gallery.title") },
+          ]}
+        />
+        <h1 className="brand-display content-page__title">{t("gallery.title")}</h1>
+        <p className="content-page__summary">{t("gallery.support")}</p>
+      </header>
+      <GalleryStrip heading="" emptyLabel={t("gallery.empty")} items={items} />
     </main>
   );
 }

@@ -85,5 +85,38 @@
     "daysMonSat": "الإثنين–السبت",
     "hours": "{days} {opens}–{closes}",
     "copyright": "© {year} KMA PolyClinic. جميع الحقوق محفوظة."
+  },
+  "seo": {
+    "homeTitle": "عيادة إسطنبول | تجميل وزراعة شعر ورعاية طبية",
+    "homeDescription": "KMA PolyClinic في تورون سنتر إسطنبول — عيادة Quiet Luxury للتجميل وزراعة الشعر والحواجب والجلدية والأسنان. TR EN FA AR.",
+    "aboutTitle": "من نحن | KMA PolyClinic إسطنبول",
+    "aboutDescription": "من كيميا إستيتيك إلى عيادة خاصة متعددة التخصصات في تورون سنتر. رعاية هادئة متعددة اللغات.",
+    "contactTitle": "حجز موعد إسطنبول | تواصل KMA PolyClinic",
+    "contactDescription": "احجز في KMA PolyClinic تورون سنتر. اتصل +90 212 680 79 00 أو واتساب أو النموذج. الإثنين–السبت 11:00–19:00.",
+    "departmentsTitle": "الأقسام | عيادة متعددة التخصصات إسطنبول",
+    "departmentsDescription": "تجميل، جلدية، أسنان، جراحة تجميلية، زراعة شعر وحواجب تحت سقف واحد — KMA PolyClinic.",
+    "servicesTitle": "علاجات إسطنبول | شعر وبوتوكس وفيلر وليزر",
+    "servicesDescription": "علاجات ذات أولوية: زراعة الحواجب والشعر، البوتوكس، الفيلر والليزر في KMA PolyClinic إسطنبول.",
+    "galleryTitle": "معرض العيادة | KMA PolyClinic إسطنبول",
+    "galleryDescription": "أجواء العيادة ومساحات الرعاية في تورون سنتر.",
+    "privacyTitle": "سياسة الخصوصية",
+    "privacyDescription": "كيف تعالج KMA PolyClinic البيانات الشخصية من الموقع ونماذج المواعيد.",
+    "termsTitle": "شروط الاستخدام",
+    "termsDescription": "شروط استخدام kmapoliklinik.com.tr. المحتوى إعلامي؛ القرارات السريرية بعد تقييم حضوري.",
+    "keywordsHome": "KMA PolyClinic, عيادة إسطنبول, زراعة شعر إسطنبول, زراعة حواجب, تورون سنتر",
+    "keywordsHair": "زراعة شعر إسطنبول, استعادة الشعر, KMA PolyClinic",
+    "keywordsEyebrow": "زراعة حواجب إسطنبول, ترميم الحواجب",
+    "keywordsBotox": "بوتوكس إسطنبول, بوتوكس طبي",
+    "keywordsFiller": "فيلر إسطنبول, فيلر شفاه, فيلر خدود",
+    "keywordsLaser": "ليزر إسطنبول, إزالة شعر بالليزر, تجديد البشرة"
+  },
+  "faq": {
+    "heading": "الأسئلة الشائعة"
+  },
+  "breadcrumb": {
+    "home": "الرئيسية"
+  },
+  "a11y": {
+    "skip": "تخطّي إلى المحتوى الرئيسي"
   }
 }

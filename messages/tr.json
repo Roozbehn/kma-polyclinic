@@ -85,5 +85,38 @@
     "daysMonSat": "Pzt–Cmt",
     "hours": "{days} {opens}–{closes}",
     "copyright": "© {year} KMA PolyClinic. Tüm hakları saklıdır."
+  },
+  "seo": {
+    "homeTitle": "Poliklinik İstanbul | Estetik, Saç ve Medikal Bakım",
+    "homeDescription": "KMA PolyClinic Torun Center, İstanbul — estetik, saç ve kaş ekimi, dermatoloji, diş ve wellness için Quiet Luxury poliklinik. TR EN FA AR.",
+    "aboutTitle": "Hakkımızda | KMA PolyClinic İstanbul",
+    "aboutDescription": "Kimia Estetik’ten Torun Center’da çok branşlı özel polikliniğe. Estetik, saç ve medikal wellness için sakin, çok dilli bakım.",
+    "contactTitle": "Randevu Al İstanbul | KMA PolyClinic İletişim",
+    "contactDescription": "KMA PolyClinic Torun Center randevu. +90 212 680 79 00, WhatsApp veya form. Pzt–Cmt 11:00–19:00.",
+    "departmentsTitle": "Bölümler | Çok Branşlı Poliklinik İstanbul",
+    "departmentsDescription": "Estetik, dermatoloji, diş, plastik cerrahi, saç ve kaş ekimi tek çatı altında — KMA PolyClinic Torun Center.",
+    "servicesTitle": "Tedaviler İstanbul | Saç, Botoks, Dolgu ve Lazer",
+    "servicesDescription": "Öncelikli tedaviler: kaş ekimi, saç ekimi, botoks, dolgu ve lazer. Kişisel klinik planlar — KMA PolyClinic İstanbul.",
+    "galleryTitle": "Klinik Galeri | KMA PolyClinic İstanbul",
+    "galleryDescription": "KMA PolyClinic Torun Center klinik atmosferi ve bakım alanları.",
+    "privacyTitle": "Gizlilik Politikası",
+    "privacyDescription": "KMA PolyClinic web sitesi ve randevu formlarında kişisel verilerin işlenmesi. İletişim: info@kmapoliklinik.com.tr.",
+    "termsTitle": "Kullanım Koşulları",
+    "termsDescription": "kmapoliklinik.com.tr kullanım koşulları. İçerik bilgilendirme amaçlıdır; klinik karar yüz yüze değerlendirme sonrası verilir.",
+    "keywordsHome": "KMA PolyClinic, İstanbul poliklinik, Torun Center klinik, saç ekimi İstanbul, kaş ekimi İstanbul, estetik klinik",
+    "keywordsHair": "saç ekimi İstanbul, FUE İstanbul, saç restorasyonu Torun Center",
+    "keywordsEyebrow": "kaş ekimi İstanbul, kaş restorasyonu, KMA PolyClinic",
+    "keywordsBotox": "botoks İstanbul, medikal botoks, mimik kırışıklığı",
+    "keywordsFiller": "dolgu İstanbul, dudak dolgusu, yanak dolgusu klinik",
+    "keywordsLaser": "lazer epilasyon İstanbul, cilt yenileme lazer"
+  },
+  "faq": {
+    "heading": "Sık sorulan sorular"
+  },
+  "breadcrumb": {
+    "home": "Ana Sayfa"
+  },
+  "a11y": {
+    "skip": "Ana içeriğe geç"
   }
 }

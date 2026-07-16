@@ -10,7 +10,7 @@ const HOME_SLUGS = new Set(["eyebrow-transplant", "hair-transplant", "botox"]);
 
 type ServiceHighlightProps = {
   items: ServiceHighlightItem[];
-  heading: string;
+  heading?: string;
   /** When true, list all items (services index). Home keeps priority subset. */
   showAll?: boolean;
 };
@@ -24,10 +24,16 @@ export function ServiceHighlight({ items, heading, showAll = false }: ServiceHig
       })();
 
   return (
-    <section className="service-highlight" aria-labelledby="service-highlight-heading">
-      <h2 id="service-highlight-heading" className="brand-display section-heading">
-        {heading}
-      </h2>
+    <section
+      className="service-highlight"
+      aria-labelledby={heading ? "service-highlight-heading" : undefined}
+      aria-label={!heading ? "Treatments" : undefined}
+    >
+      {heading ? (
+        <h2 id="service-highlight-heading" className="brand-display section-heading">
+          {heading}
+        </h2>
+      ) : null}
       <ul className="service-highlight__list">
         {list.map((item) => (
           <li key={item.slug}>

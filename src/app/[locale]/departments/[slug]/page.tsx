@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Link } from "@/i18n/navigation";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { JsonLd } from "@/components/JsonLd";
 import { MedicalDisclaimer } from "@/components/MedicalDisclaimer";
 import { MetaViewContent } from "@/components/MetaViewContent";
 import { routing } from "@/i18n/routing";
@@ -12,6 +14,7 @@ import {
   MVP_DEPARTMENT_SLUGS,
 } from "@/lib/mvp-content";
 import { blocksToParagraphs } from "@/lib/portable-text";
+import { breadcrumbJsonLd, serviceJsonLd, SITE_URL, webPageJsonLd } from "@/lib/schema-org";
 import { urlForImage } from "@/lib/sanity-image";
 import { pageMetadata } from "@/lib/seo";
 
@@ -34,7 +37,7 @@ export async function generateMetadata({
   return pageMetadata({
     locale,
     path: `/departments/${slug}`,
-    title: `${dept.title} | KMA PolyClinic`,
+    title: dept.title,
     description: dept.summary || dept.title,
   });
 }
@@ -51,19 +54,44 @@ export default async function DepartmentDetailPage({
 
   const t = await getTranslations();
   const body = blocksToParagraphs(dept.body);
+  const url = `${SITE_URL}/${locale}/departments/${slug}`;
   const heroSrc =
     dept.heroImage && typeof dept.heroImage === "object"
       ? urlForImage(dept.heroImage).width(1600).height(900).fit("crop").url()
       : null;
 
   return (
-    <main className="content-page content-page--visual">
+    <main className="content-page content-page--visual content-page--wide">
       <MetaViewContent contentName={dept.title} contentIds={[slug]} contentType="department" />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: t("breadcrumb.home"), path: `/${locale}` },
+          { name: t("departmentsPage.title"), path: `/${locale}/departments` },
+          { name: dept.title, path: `/${locale}/departments/${slug}` },
+        ])}
+      />
+      <JsonLd
+        data={webPageJsonLd({
+          name: dept.title,
+          description: dept.summary || dept.title,
+          url,
+          locale,
+          type: "CollectionPage",
+        })}
+      />
+      <JsonLd
+        data={serviceJsonLd({
+          name: dept.title,
+          description: dept.summary || dept.title,
+          url,
+        })}
+      />
+
       {heroSrc ? (
         <div className="content-page__hero">
           <Image
             src={heroSrc}
-            alt=""
+            alt={dept.title}
             width={1600}
             height={900}
             className="content-page__hero-img"
@@ -71,6 +99,13 @@ export default async function DepartmentDetailPage({
           />
         </div>
       ) : null}
+      <Breadcrumbs
+        items={[
+          { name: t("breadcrumb.home"), href: "/" },
+          { name: t("departmentsPage.title"), href: "/departments" },
+          { name: dept.title },
+        ]}
+      />
       <h1 className="brand-display content-page__title">{dept.title}</h1>
       <p className="content-page__summary">{dept.summary}</p>
       {body.length > 0 ? (
@@ -81,9 +116,14 @@ export default async function DepartmentDetailPage({
         </div>
       ) : null}
       <MedicalDisclaimer />
-      <Link className="btn-primary" href="/contact">
-        {t("cta.appointment")}
-      </Link>
+      <div className="content-page__actions">
+        <Link className="btn-primary" href="/contact">
+          {t("cta.appointment")}
+        </Link>
+        <Link className="btn-ghost" href="/departments">
+          {t("departmentsPage.title")}
+        </Link>
+      </div>
     </main>
   );
 }

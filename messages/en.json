@@ -85,5 +85,38 @@
     "daysMonSat": "Mon–Sat",
     "hours": "{days} {opens}–{closes}",
     "copyright": "© {year} KMA PolyClinic. All rights reserved."
+  },
+  "seo": {
+    "homeTitle": "Polyclinic Istanbul | Aesthetics, Hair & Medical Care",
+    "homeDescription": "KMA PolyClinic in Torun Center, Istanbul — Quiet Luxury polyclinic for aesthetics, hair and eyebrow transplant, dermatology, dentistry and wellness. TR EN FA AR.",
+    "aboutTitle": "About KMA PolyClinic Istanbul",
+    "aboutDescription": "From Kimia Estetik to a multi-specialty private polyclinic in Torun Center. Calm, language-ready care for aesthetics, hair and medical wellness.",
+    "contactTitle": "Book Appointment Istanbul | Contact KMA PolyClinic",
+    "contactDescription": "Book at KMA PolyClinic, Torun Center. Call +90 212 680 79 00, WhatsApp, or send an appointment request. Mon–Sat 11:00–19:00.",
+    "departmentsTitle": "Departments | Multi-Specialty Polyclinic Istanbul",
+    "departmentsDescription": "Aesthetics, dermatology, dentistry, plastic surgery, hair and eyebrow transplant under one roof at KMA PolyClinic, Torun Center, Istanbul.",
+    "servicesTitle": "Treatments Istanbul | Hair, Botox, Filler & Laser",
+    "servicesDescription": "Priority treatments: eyebrow transplant, hair transplant, botox, fillers and laser at KMA PolyClinic Istanbul. Personalised clinical plans.",
+    "galleryTitle": "Clinic Gallery | KMA PolyClinic Istanbul",
+    "galleryDescription": "Care spaces and clinical atmosphere at KMA PolyClinic, Torun Center, Istanbul.",
+    "privacyTitle": "Privacy Policy",
+    "privacyDescription": "How KMA PolyClinic processes personal data from website visits and appointment forms. Contact info@kmapoliklinik.com.tr.",
+    "termsTitle": "Terms of Use",
+    "termsDescription": "Terms for using kmapoliklinik.com.tr. Informational content only; clinical decisions follow in-person assessment.",
+    "keywordsHome": "KMA PolyClinic, Istanbul polyclinic, Torun Center clinic, hair transplant Istanbul, eyebrow transplant Istanbul, aesthetics clinic Istanbul",
+    "keywordsHair": "hair transplant Istanbul, FUE Istanbul, hair restoration Torun Center, KMA PolyClinic",
+    "keywordsEyebrow": "eyebrow transplant Istanbul, brow restoration, KMA PolyClinic",
+    "keywordsBotox": "botox Istanbul, medical botox, expression lines treatment",
+    "keywordsFiller": "dermal filler Istanbul, lip filler, cheek filler clinic",
+    "keywordsLaser": "laser hair removal Istanbul, laser skin renewal, clinical laser"
+  },
+  "faq": {
+    "heading": "Frequently asked questions"
+  },
+  "breadcrumb": {
+    "home": "Home"
+  },
+  "a11y": {
+    "skip": "Skip to main content"
   }
 }

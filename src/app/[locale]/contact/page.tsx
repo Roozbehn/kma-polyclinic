@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ContactPanel } from "@/components/ContactPanel";
+import { JsonLd } from "@/components/JsonLd";
 import { canViewDepartment } from "@/lib/locale-gate";
 import { getDepartmentsForLocale } from "@/lib/mvp-content";
+import { breadcrumbJsonLd, medicalClinicJsonLd, SITE_URL, webPageJsonLd } from "@/lib/schema-org";
 import { pageMetadata } from "@/lib/seo";
 
 export async function generateMetadata({
@@ -11,12 +14,12 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "contact" });
+  const t = await getTranslations({ locale, namespace: "seo" });
   return pageMetadata({
     locale,
     path: "/contact",
-    title: `${t("title")} | KMA PolyClinic`,
-    description: t("support"),
+    title: t("contactTitle"),
+    description: t("contactDescription"),
   });
 }
 
@@ -27,13 +30,41 @@ export default async function ContactPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const departments = (await getDepartmentsForLocale(locale))
-    .filter((dept) => canViewDepartment(dept, locale))
-    .map((dept) => ({ slug: dept.slug, title: dept.title }));
+  const t = await getTranslations();
+  const departments = (await getDepartmentsForLocale(locale)).filter((d) =>
+    canViewDepartment(d, locale),
+  );
+  const url = `${SITE_URL}/${locale}/contact`;
 
   return (
     <main>
-      <ContactPanel departments={departments} />
+      <JsonLd data={medicalClinicJsonLd()} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: t("breadcrumb.home"), path: `/${locale}` },
+          { name: t("nav.contact"), path: `/${locale}/contact` },
+        ])}
+      />
+      <JsonLd
+        data={webPageJsonLd({
+          name: t("contact.title"),
+          description: t("contact.support"),
+          url,
+          locale,
+          type: "ContactPage",
+        })}
+      />
+      <div className="page-crumbs">
+        <Breadcrumbs
+          items={[
+            { name: t("breadcrumb.home"), href: "/" },
+            { name: t("nav.contact") },
+          ]}
+        />
+      </div>
+      <ContactPanel
+        departments={departments.map((d) => ({ slug: d.slug, title: d.title }))}
+      />
     </main>
   );
 }

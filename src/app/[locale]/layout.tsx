@@ -97,13 +97,18 @@ export default async function LocaleLayout({
   const dir = isRtlLocale(locale) ? "rtl" : "ltr";
   const fontClass = `${fraunces.variable} ${dmSans.variable} ${notoArabic.variable}`;
 
+  const tA11y = await getTranslations({ locale, namespace: "a11y" });
+
   return (
     <html lang={locale} dir={dir} suppressHydrationWarning>
       <body className={fontClass}>
         <MetaPixel />
         <NextIntlClientProvider messages={messages}>
+          <a className="skip-link" href="#main-content">
+            {tA11y("skip")}
+          </a>
           <SiteHeader />
-          {children}
+          <div id="main-content">{children}</div>
           <SiteFooter />
           <FloatingWhatsApp />
         </NextIntlClientProvider>

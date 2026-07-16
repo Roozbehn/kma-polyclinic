@@ -10,7 +10,7 @@ export type DepartmentGridItem = {
 
 type DepartmentGridProps = {
   items: DepartmentGridItem[];
-  heading: string;
+  heading?: string;
 };
 
 export function DepartmentGrid({ items, heading }: DepartmentGridProps) {
@@ -19,10 +19,16 @@ export function DepartmentGrid({ items, heading }: DepartmentGridProps) {
   );
 
   return (
-    <section className="department-grid" aria-labelledby="department-grid-heading">
-      <h2 id="department-grid-heading" className="brand-display section-heading">
-        {heading}
-      </h2>
+    <section
+      className="department-grid"
+      aria-labelledby={heading ? "department-grid-heading" : undefined}
+      aria-label={!heading ? "Departments" : undefined}
+    >
+      {heading ? (
+        <h2 id="department-grid-heading" className="brand-display section-heading">
+          {heading}
+        </h2>
+      ) : null}
       <ul className="department-grid__list reveal-stagger">
         {sorted.map((item) => (
           <Reveal key={item.slug} as="li">

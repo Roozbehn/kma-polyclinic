@@ -85,5 +85,38 @@
     "daysMonSat": "دوشنبه–شنبه",
     "hours": "{days} {opens}–{closes}",
     "copyright": "© {year} KMA PolyClinic. همه حقوق محفوظ است."
+  },
+  "seo": {
+    "homeTitle": "پلی‌کلینیک استانبول | زیبایی، مو و مراقبت پزشکی",
+    "homeDescription": "KMA PolyClinic تورون سنتر استانبول — پلی‌کلینیک Quiet Luxury برای زیبایی، کاشت مو و ابرو، پوست، دندان و سلامت. TR EN FA AR.",
+    "aboutTitle": "درباره KMA PolyClinic استانبول",
+    "aboutDescription": "از کیمیا استتیک تا پلی‌کلینیک چندتخصصی خصوصی در تورون سنتر. مراقبت آرام و چندزبانه برای زیبایی و مو.",
+    "contactTitle": "رزرو نوبت استانبول | تماس KMA PolyClinic",
+    "contactDescription": "نوبت در KMA PolyClinic تورون سنتر. تلفن +90 212 680 79 00، واتساپ یا فرم. دوشنبه–شنبه ۱۱:۰۰–۱۹:۰۰.",
+    "departmentsTitle": "بخش‌ها | پلی‌کلینیک چندتخصصی استانبول",
+    "departmentsDescription": "زیبایی، پوست، دندانپزشکی، جراحی پلاستیک، کاشت مو و ابرو زیر یک سقف — KMA PolyClinic.",
+    "servicesTitle": "درمان‌ها استانبول | مو، بوتاکس، فیلر و لیزر",
+    "servicesDescription": "درمان‌های اولویت‌دار: کاشت ابرو و مو، بوتاکس، فیلر و لیزر در KMA PolyClinic استانبول.",
+    "galleryTitle": "گالری کلینیک | KMA PolyClinic استانبول",
+    "galleryDescription": "فضا و فضای مراقبت کلینیکی KMA PolyClinic در تورون سنتر.",
+    "privacyTitle": "سیاست حریم خصوصی",
+    "privacyDescription": "نحوه پردازش داده‌های شخصی در وب‌سایت و فرم‌های نوبت KMA PolyClinic.",
+    "termsTitle": "شرایط استفاده",
+    "termsDescription": "شرایط استفاده از kmapoliklinik.com.tr. محتوا اطلاع‌رسانی است؛ تصمیم بالینی پس از ارزیابی حضوری.",
+    "keywordsHome": "KMA PolyClinic, پلی‌کلینیک استانبول, کاشت مو استانبول, کاشت ابرو, تورون سنتر",
+    "keywordsHair": "کاشت مو استانبول, ترمیم مو, KMA PolyClinic",
+    "keywordsEyebrow": "کاشت ابرو استانبول, بازسازی ابرو",
+    "keywordsBotox": "بوتاکس استانبول, بوتاکس پزشکی",
+    "keywordsFiller": "فیلر استانبول, فیلر لب, فیلر گونه",
+    "keywordsLaser": "لیزر استانبول, اپیلاسیون لیزری, نوزایی پوست"
+  },
+  "faq": {
+    "heading": "پرسش‌های متداول"
+  },
+  "breadcrumb": {
+    "home": "خانه"
+  },
+  "a11y": {
+    "skip": "رفتن به محتوای اصلی"
   }
 }
