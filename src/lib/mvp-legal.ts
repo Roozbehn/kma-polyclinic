@@ -58,6 +58,12 @@ const mvpLegal: Record<AppLocale, LegalBundle> = {
             `KVKK kapsamındaki erişim, düzeltme, silme ve itiraz haklarınızı ${NAP.email} adresine yazarak kullanabilirsiniz. Politika güncellenirken web sitesindeki bu sayfa esas alınır.`,
           ],
         },
+        {
+          heading: "Ölçüm ve reklam olayları (Meta)",
+          paragraphs: [
+            "Web sitesi performansını ve reklam ölçümünü iyileştirmek için Meta Pixel (tarayıcı) ve Conversions API (sunucu) kullanabiliriz. Aynı eylemin iki kez sayılmaması için event_name ve event_id ile tekilleştirme (deduplication) uygulanır. Ayrıntılar: /tr/measurement",
+          ],
+        },
       ],
     },
     terms: {
@@ -130,6 +136,12 @@ const mvpLegal: Record<AppLocale, LegalBundle> = {
           heading: "Your rights",
           paragraphs: [
             `You may request access, correction, deletion, or objection by writing to ${NAP.email}. The version published on this page is the current policy.`,
+          ],
+        },
+        {
+          heading: "Measurement and ad events (Meta)",
+          paragraphs: [
+            "We may use Meta Pixel (browser) and the Conversions API (server) to measure site and ad performance. When the same action is sent from both sources, we apply deduplication with matching event_name and event_id so it is counted once. Details: /en/measurement",
           ],
         },
       ],
@@ -206,6 +218,12 @@ const mvpLegal: Record<AppLocale, LegalBundle> = {
             `برای دسترسی، اصلاح، حذف یا اعتراض به ${NAP.email} بنویسید. نسخه منتشرشده در این صفحه، سیاست جاری است.`,
           ],
         },
+        {
+          heading: "اندازه‌گیری و رویدادهای تبلیغاتی (متا)",
+          paragraphs: [
+            "ممکن است از Meta Pixel (مرورگر) و Conversions API (سرور) برای اندازه‌گیری عملکرد سایت و تبلیغات استفاده کنیم. وقتی همان اقدام از هر دو منبع ارسال شود، با event_name و event_id حذف تکرار انجام می‌شود تا فقط یک‌بار شمرده شود. جزئیات: /fa/measurement",
+          ],
+        },
       ],
     },
     terms: {
@@ -278,6 +296,12 @@ const mvpLegal: Record<AppLocale, LegalBundle> = {
           heading: "حقوقكم",
           paragraphs: [
             `يمكنكم طلب الوصول أو التصحيح أو الحذف أو الاعتراض عبر الكتابة إلى ${NAP.email}. النسخة المنشورة في هذه الصفحة هي السياسة الحالية.`,
+          ],
+        },
+        {
+          heading: "القياس وأحداث الإعلانات (Meta)",
+          paragraphs: [
+            "قد نستخدم Meta Pixel (المتصفح) وConversions API (الخادم) لقياس أداء الموقع والإعلانات. عند إرسال نفس الإجراء من المصدرين نطبّق إزالة التكرار بـ event_name وevent_id ليُحسب مرة واحدة. التفاصيل: /ar/measurement",
           ],
         },
       ],

@@ -13,6 +13,7 @@ const STATIC_PATHS = [
   "/contact",
   "/privacy",
   "/terms",
+  "/measurement",
 ] as const;
 
 const DEPARTMENT_SLUGS = [

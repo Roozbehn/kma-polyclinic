@@ -66,7 +66,8 @@
   "whatsappPrefill": "مرحبًا، أود حجز موعد في عيادة KMA PolyClinic.",
   "legal": {
     "privacy": "الخصوصية",
-    "terms": "الشروط"
+    "terms": "الشروط",
+    "measurement": "قياس الأحداث"
   },
   "notFound": {
     "code": "404",
@@ -108,7 +109,9 @@
     "keywordsEyebrow": "زراعة حواجب إسطنبول, ترميم الحواجب",
     "keywordsBotox": "بوتوكس إسطنبول, بوتوكس طبي",
     "keywordsFiller": "فيلر إسطنبول, فيلر شفاه, فيلر خدود",
-    "keywordsLaser": "ليزر إسطنبول, إزالة شعر بالليزر, تجديد البشرة"
+    "keywordsLaser": "ليزر إسطنبول, إزالة شعر بالليزر, تجديد البشرة",
+    "measurementTitle": "إزالة تكرار Meta Pixel وConversions API",
+    "measurementDescription": "كيف تزيل KMA PolyClinic تكرار أحداث Meta Pixel وConversions API باستخدام event_name وevent_id."
   },
   "faq": {
     "heading": "الأسئلة الشائعة"

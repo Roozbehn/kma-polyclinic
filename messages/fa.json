@@ -66,7 +66,8 @@
   "whatsappPrefill": "سلام، می‌خواهم از کلینیک KMA PolyClinic نوبت بگیرم.",
   "legal": {
     "privacy": "حریم خصوصی",
-    "terms": "شرایط"
+    "terms": "شرایط",
+    "measurement": "اندازه‌گیری رویداد"
   },
   "notFound": {
     "code": "۴۰۴",
@@ -108,7 +109,9 @@
     "keywordsEyebrow": "کاشت ابرو استانبول, بازسازی ابرو",
     "keywordsBotox": "بوتاکس استانبول, بوتاکس پزشکی",
     "keywordsFiller": "فیلر استانبول, فیلر لب, فیلر گونه",
-    "keywordsLaser": "لیزر استانبول, اپیلاسیون لیزری, نوزایی پوست"
+    "keywordsLaser": "لیزر استانبول, اپیلاسیون لیزری, نوزایی پوست",
+    "measurementTitle": "حذف تکرار Meta Pixel و Conversions API",
+    "measurementDescription": "حذف تکرار رویدادهای Meta Pixel و Conversions API در KMA PolyClinic با event_name و event_id."
   },
   "faq": {
     "heading": "پرسش‌های متداول"

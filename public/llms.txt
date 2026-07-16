@@ -29,6 +29,7 @@
 - [Laser](https://kmapoliklinik.com.tr/en/services/laser): Clinical laser treatments
 - [Contact / appointment](https://kmapoliklinik.com.tr/en/contact): Book or message the clinic
 - [Privacy](https://kmapoliklinik.com.tr/en/privacy) · [Terms](https://kmapoliklinik.com.tr/en/terms)
+- [Meta event measurement & deduplication](https://kmapoliklinik.com.tr/en/measurement): Pixel + Conversions API, event_id dedupe
 
 ### Turkish
 - [Ana sayfa](https://kmapoliklinik.com.tr/tr)

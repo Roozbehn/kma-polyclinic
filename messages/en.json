@@ -66,7 +66,8 @@
   "whatsappPrefill": "Hello, I would like to book an appointment at KMA PolyClinic.",
   "legal": {
     "privacy": "Privacy",
-    "terms": "Terms"
+    "terms": "Terms",
+    "measurement": "Event measurement"
   },
   "notFound": {
     "code": "404",
@@ -108,7 +109,9 @@
     "keywordsEyebrow": "eyebrow transplant Istanbul, brow restoration, KMA PolyClinic",
     "keywordsBotox": "botox Istanbul, medical botox, expression lines treatment",
     "keywordsFiller": "dermal filler Istanbul, lip filler, cheek filler clinic",
-    "keywordsLaser": "laser hair removal Istanbul, laser skin renewal, clinical laser"
+    "keywordsLaser": "laser hair removal Istanbul, laser skin renewal, clinical laser",
+    "measurementTitle": "Meta Pixel & Conversions API Deduplication",
+    "measurementDescription": "How KMA PolyClinic deduplicates Meta Pixel and Conversions API events with event_name and event_id for accurate conversion reporting."
   },
   "faq": {
     "heading": "Frequently asked questions"

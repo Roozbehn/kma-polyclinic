@@ -66,7 +66,8 @@
   "whatsappPrefill": "Merhaba, KMA PolyClinic'ten randevu almak istiyorum.",
   "legal": {
     "privacy": "Gizlilik",
-    "terms": "Koşullar"
+    "terms": "Koşullar",
+    "measurement": "Olay ölçümü"
   },
   "notFound": {
     "code": "404",
@@ -108,7 +109,9 @@
     "keywordsEyebrow": "kaş ekimi İstanbul, kaş restorasyonu, KMA PolyClinic",
     "keywordsBotox": "botoks İstanbul, medikal botoks, mimik kırışıklığı",
     "keywordsFiller": "dolgu İstanbul, dudak dolgusu, yanak dolgusu klinik",
-    "keywordsLaser": "lazer epilasyon İstanbul, cilt yenileme lazer"
+    "keywordsLaser": "lazer epilasyon İstanbul, cilt yenileme lazer",
+    "measurementTitle": "Meta Pixel ve Conversions API Tekilleştirme",
+    "measurementDescription": "KMA PolyClinic’te Meta Pixel ve Conversions API olaylarının event_name ve event_id ile tekilleştirilmesi."
   },
   "faq": {
     "heading": "Sık sorulan sorular"

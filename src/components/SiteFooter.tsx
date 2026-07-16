@@ -50,6 +50,7 @@ export async function SiteFooter() {
         <div className="site-footer__legal">
           <Link href="/privacy">{t("legal.privacy")}</Link>
           <Link href="/terms">{t("legal.terms")}</Link>
+          <Link href="/measurement">{t("legal.measurement")}</Link>
         </div>
         <p className="site-footer__copy">{t("footer.copyright", { year: new Date().getFullYear() })}</p>
       </div>
