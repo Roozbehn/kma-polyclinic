@@ -30,8 +30,24 @@ Sanity Studio (same app): [http://localhost:3000/studio](http://localhost:3000/s
 | `RESEND_API_KEY` | Contact form email via Resend |
 | `LEADS_TO_EMAIL` | Lead inbox (default `info@kmapoliklinik.com.tr`) |
 | `LEADS_FROM_EMAIL` | From address for lead mail |
+| `NEXT_PUBLIC_META_PIXEL_ID` | Optional Meta Pixel ID |
+| `META_CAPI_ACCESS_TOKEN` | Optional Meta Conversions API token |
+| `META_CAPI_TEST_EVENT_CODE` | Optional Meta CAPI test code |
 
 Without Sanity IDs, department/service/gallery queries fall back to MVP static content. Without Resend, the leads API should still rate-limit and reject/fail gracefully (see tests).
+
+## Production checklist
+
+- [x] TR / EN / FA / AR locales (RTL for FA/AR)
+- [x] Full MVP department + service body copy with SEO fields
+- [x] Legal pages (privacy/terms) multi-locale
+- [x] Contact leads API (rate limit, honeypot, Resend)
+- [x] Security headers (HSTS, nosniff, referrer, permissions-policy)
+- [x] OG/Twitter images, sitemap with hreflang, robots, llms.txt
+- [x] Locale 404 + global error boundary
+- [x] Medical disclaimer on treatment/department pages
+- [x] GitHub Actions CI (lint, test, build)
+- [x] Vercel production domain `kmapoliklinik.com.tr`
 
 ## Scripts
 

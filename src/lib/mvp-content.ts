@@ -63,8 +63,6 @@ export const MVP_PRIORITY_SERVICE_SLUGS = [
   "laser",
 ] as const;
 
-const DEPARTMENT_SLUGS = MVP_DEPARTMENT_SLUGS;
-
 /** Build Sanity-compatible block content from plain paragraphs. */
 function body(...paragraphs: string[]) {
   return paragraphs.map((text) => ({
@@ -74,7 +72,7 @@ function body(...paragraphs: string[]) {
 }
 
 function dept(
-  slug: (typeof DEPARTMENT_SLUGS)[number],
+  slug: (typeof MVP_DEPARTMENT_SLUGS)[number],
   title: string,
   summary: string,
   navPriority: number,

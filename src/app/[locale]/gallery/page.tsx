@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { GalleryStrip, type GalleryCmsItem } from "@/components/GalleryStrip";
+import { getDepartmentsForLocale } from "@/lib/mvp-content";
 import { getGallery } from "@/lib/sanity";
 import { urlForImage } from "@/lib/sanity-image";
 import { pageMetadata } from "@/lib/seo";
@@ -30,7 +31,7 @@ export default async function GalleryPage({
   const t = await getTranslations("gallery");
   const raw = await getGallery(locale);
 
-  const items: GalleryCmsItem[] = (raw ?? []).map(
+  let items: GalleryCmsItem[] = (raw ?? []).map(
     (
       item: {
         title?: string;
@@ -63,8 +64,24 @@ export default async function GalleryPage({
     },
   );
 
+  // MVP placeholders when CMS gallery is empty — department-themed tiles, not fake photos.
+  if (items.length === 0) {
+    const departments = await getDepartmentsForLocale(locale);
+    items = departments.slice(0, 6).map((dept, index) => ({
+      id: `mvp-${dept.slug}-${index}`,
+      title: dept.title,
+      beforeAfter: false,
+      departmentSlug: dept.slug,
+      departmentTitle: dept.title,
+      imageUrl: null,
+    }));
+  }
+
   return (
     <main>
+      <p className="gallery-strip__support content-page__summary" style={{ paddingInline: "clamp(1.25rem, 4vw, 3rem)", marginBottom: 0, paddingTop: "var(--space-section)" }}>
+        {t("support")}
+      </p>
       <GalleryStrip heading={t("title")} emptyLabel={t("empty")} items={items} />
     </main>
   );

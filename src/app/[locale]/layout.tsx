@@ -48,6 +48,22 @@ export async function generateMetadata({
       template: "%s | KMA PolyClinic",
     },
     description: t("support"),
+    applicationName: "KMA PolyClinic",
+    authors: [{ name: "KMA PolyClinic" }],
+    creator: "KMA PolyClinic",
+    keywords: [
+      "KMA PolyClinic",
+      "Istanbul clinic",
+      "Torun Center",
+      "hair transplant",
+      "eyebrow transplant",
+      "aesthetics",
+    ],
+    icons: {
+      icon: [{ url: "/favicon.ico" }, { url: "/brand/logo.svg", type: "image/svg+xml" }],
+      apple: [{ url: "/brand/logo.svg" }],
+    },
+    manifest: "/site.webmanifest",
     alternates: {
       canonical: `/${locale}`,
       languages: localeLanguageAlternates(""),
@@ -55,6 +71,14 @@ export async function generateMetadata({
     openGraph: {
       siteName: "KMA PolyClinic",
       type: "website",
+      locale: locale === "tr" ? "tr_TR" : locale === "fa" ? "fa_IR" : locale === "ar" ? "ar_SA" : "en_US",
+    },
+    twitter: {
+      card: "summary_large_image",
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
   };
 }

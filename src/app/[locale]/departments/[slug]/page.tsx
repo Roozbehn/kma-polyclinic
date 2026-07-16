@@ -3,12 +3,25 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Link } from "@/i18n/navigation";
+import { MedicalDisclaimer } from "@/components/MedicalDisclaimer";
 import { MetaViewContent } from "@/components/MetaViewContent";
+import { routing } from "@/i18n/routing";
 import { canViewDepartment } from "@/lib/locale-gate";
-import { getDepartmentBySlugForLocale } from "@/lib/mvp-content";
+import {
+  getDepartmentBySlugForLocale,
+  MVP_DEPARTMENT_SLUGS,
+} from "@/lib/mvp-content";
 import { blocksToParagraphs } from "@/lib/portable-text";
 import { urlForImage } from "@/lib/sanity-image";
 import { pageMetadata } from "@/lib/seo";
+
+export function generateStaticParams() {
+  return routing.locales.flatMap((locale) =>
+    MVP_DEPARTMENT_SLUGS.filter((slug) => slug !== "checkup-laboratory" || locale === "fa").map(
+      (slug) => ({ locale, slug }),
+    ),
+  );
+}
 
 export async function generateMetadata({
   params,
@@ -67,6 +80,7 @@ export default async function DepartmentDetailPage({
           ))}
         </div>
       ) : null}
+      <MedicalDisclaimer />
       <Link className="btn-primary" href="/contact">
         {t("cta.appointment")}
       </Link>

@@ -18,14 +18,24 @@ describe("parseLeadBody", () => {
   });
 
   it("rejects missing name", () => {
-    const { name: _name, ...rest } = validBody;
+    const rest = {
+      phone: validBody.phone,
+      email: validBody.email,
+      locale: validBody.locale,
+      department: validBody.department,
+      message: validBody.message,
+      website: validBody.website,
+    };
     const result = parseLeadBody(rest);
     expect(result.success).toBe(false);
   });
 
-  it("rejects honeypot website with content", () => {
-    const result = parseLeadBody({ ...validBody, website: "x" });
-    expect(result.success).toBe(false);
+  it("accepts honeypot website with content (route silently succeeds)", () => {
+    const result = parseLeadBody({ ...validBody, website: "http://spam.example" });
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.website).toBe("http://spam.example");
+    }
   });
 
   it("allows empty website honeypot", () => {

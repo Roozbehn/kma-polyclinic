@@ -36,7 +36,8 @@
   "gallery": {
     "title": "Galeri",
     "support": "KMA PolyClinic klinik atmosferi ve bakım alanları — Torun Center, İstanbul.",
-    "empty": "Yeni çalışmalar yayınlandıkça galeri görselleri burada görünecek."
+    "empty": "Yeni çalışmalar yayınlandıkça galeri görselleri burada görünecek.",
+    "beforeAfter": "Klinik odak"
   },
   "services": {
     "title": "Tedaviler",
@@ -66,5 +67,23 @@
   "legal": {
     "privacy": "Gizlilik",
     "terms": "Koşullar"
+  },
+  "notFound": {
+    "code": "404",
+    "title": "Bu sayfa bulunamadı",
+    "support": "Bağlantı güncel olmayabilir veya sayfa bu dilde yayınlanmamış olabilir.",
+    "home": "Ana sayfaya dön",
+    "contact": "İletişim"
+  },
+  "disclaimer": {
+    "label": "Tıbbi uyarı",
+    "text": "Bu sayfadaki bilgiler genel bilgilendirme amaçlıdır; kişisel tıbbi tavsiye, teşhis veya tedavi yerine geçmez. Uygunluk yalnızca yüz yüze klinik değerlendirme sonrası netleşir."
+  },
+  "footer": {
+    "tagline": "Quiet Luxury poliklinik · Torun Center, İstanbul",
+    "navLabel": "Alt menü",
+    "daysMonSat": "Pzt–Cmt",
+    "hours": "{days} {opens}–{closes}",
+    "copyright": "© {year} KMA PolyClinic. Tüm hakları saklıdır."
   }
 }

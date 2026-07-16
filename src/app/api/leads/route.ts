@@ -21,6 +21,8 @@ export async function POST(req: NextRequest) {
       { status: 400 },
     );
   }
+
+  // Silent success for honeypot hits
   if (parsed.data.website) {
     return NextResponse.json({ ok: true });
   }
@@ -47,6 +49,7 @@ export async function POST(req: NextRequest) {
 
   const resendKey = process.env.RESEND_API_KEY;
   if (!resendKey) {
+    console.error("[leads] RESEND_API_KEY missing");
     return NextResponse.json({ error: "email_not_configured" }, { status: 500 });
   }
 
@@ -54,19 +57,29 @@ export async function POST(req: NextRequest) {
   const to = process.env.LEADS_TO_EMAIL || "info@kmapoliklinik.com.tr";
   const from = process.env.LEADS_FROM_EMAIL || "noreply@kmapoliklinik.com.tr";
 
-  await resend.emails.send({
-    from,
-    to,
-    subject: `[KMA Lead] ${parsed.data.name} (${parsed.data.locale})`,
-    text: [
-      `Name: ${parsed.data.name}`,
-      `Phone: ${parsed.data.phone}`,
-      `Email: ${parsed.data.email || "-"}`,
-      `Locale: ${parsed.data.locale}`,
-      `Department: ${parsed.data.department || "-"}`,
-      `Message: ${parsed.data.message || "-"}`,
-    ].join("\n"),
-  });
+  try {
+    const { error } = await resend.emails.send({
+      from,
+      to,
+      subject: `[KMA Lead] ${parsed.data.name} (${parsed.data.locale})`,
+      text: [
+        `Name: ${parsed.data.name}`,
+        `Phone: ${parsed.data.phone}`,
+        `Email: ${parsed.data.email || "-"}`,
+        `Locale: ${parsed.data.locale}`,
+        `Department: ${parsed.data.department || "-"}`,
+        `Message: ${parsed.data.message || "-"}`,
+        `IP: ${ip}`,
+      ].join("\n"),
+    });
+    if (error) {
+      console.error("[leads] resend error", error);
+      return NextResponse.json({ error: "email_failed" }, { status: 502 });
+    }
+  } catch (err) {
+    console.error("[leads] resend throw", err);
+    return NextResponse.json({ error: "email_failed" }, { status: 502 });
+  }
 
   return NextResponse.json({ ok: true });
 }

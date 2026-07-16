@@ -36,7 +36,8 @@
   "gallery": {
     "title": "Gallery",
     "support": "Clinical atmosphere and care spaces at KMA PolyClinic, Torun Center, Istanbul.",
-    "empty": "Gallery images will appear here as we publish new work from the clinic."
+    "empty": "Gallery images will appear here as we publish new work from the clinic.",
+    "beforeAfter": "Clinical focus"
   },
   "services": {
     "title": "Treatments",
@@ -66,5 +67,23 @@
   "legal": {
     "privacy": "Privacy",
     "terms": "Terms"
+  },
+  "notFound": {
+    "code": "404",
+    "title": "This page is not available",
+    "support": "The link may be outdated, or the page is not published in this language.",
+    "home": "Back to home",
+    "contact": "Contact us"
+  },
+  "disclaimer": {
+    "label": "Medical notice",
+    "text": "Information on this page is general and does not replace personal medical advice, diagnosis, or treatment. Suitability is confirmed only after an in-person clinical assessment."
+  },
+  "footer": {
+    "tagline": "Quiet Luxury polyclinic · Torun Center, Istanbul",
+    "navLabel": "Footer",
+    "daysMonSat": "Mon–Sat",
+    "hours": "{days} {opens}–{closes}",
+    "copyright": "© {year} KMA PolyClinic. All rights reserved."
   }
 }

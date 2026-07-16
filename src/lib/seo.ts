@@ -13,8 +13,9 @@ export function pageMetadata(options: {
   path: string;
   title: string;
   description: string;
+  noIndex?: boolean;
 }): Metadata {
-  const { locale, path, title, description } = options;
+  const { locale, path, title, description, noIndex } = options;
   const normalized = path === "/" ? "" : path.startsWith("/") ? path : `/${path}`;
   const canonical = `/${locale}${normalized}`;
   const url = `${SITE_URL}${canonical}`;
@@ -22,6 +23,7 @@ export function pageMetadata(options: {
   return {
     title,
     description,
+    robots: noIndex ? { index: false, follow: false } : { index: true, follow: true },
     alternates: {
       canonical,
       languages: localeLanguageAlternates(normalized),

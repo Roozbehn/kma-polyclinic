@@ -7,7 +7,8 @@ export const leadSchema = z.object({
   locale: z.enum(["tr", "en", "fa", "ar"]),
   department: z.string().max(80).optional(),
   message: z.string().max(2000).optional(),
-  website: z.string().max(0).optional(),
+  /** Honeypot — bots fill this; humans leave empty. */
+  website: z.string().max(200).optional(),
   eventId: z.string().min(8).max(80).optional(),
   fbp: z.string().max(200).optional(),
   fbc: z.string().max(200).optional(),

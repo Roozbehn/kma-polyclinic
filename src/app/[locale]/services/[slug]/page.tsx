@@ -2,10 +2,21 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Link } from "@/i18n/navigation";
+import { MedicalDisclaimer } from "@/components/MedicalDisclaimer";
 import { MetaViewContent } from "@/components/MetaViewContent";
-import { getServiceBySlugForLocale } from "@/lib/mvp-content";
+import { routing } from "@/i18n/routing";
+import {
+  getServiceBySlugForLocale,
+  MVP_PRIORITY_SERVICE_SLUGS,
+} from "@/lib/mvp-content";
 import { blocksToParagraphs } from "@/lib/portable-text";
 import { pageMetadata } from "@/lib/seo";
+
+export function generateStaticParams() {
+  return routing.locales.flatMap((locale) =>
+    MVP_PRIORITY_SERVICE_SLUGS.map((slug) => ({ locale, slug })),
+  );
+}
 
 export async function generateMetadata({
   params,
@@ -53,6 +64,7 @@ export default async function ServiceDetailPage({
           ))}
         </div>
       ) : null}
+      <MedicalDisclaimer />
       <Link className="btn-primary" href="/contact">
         {t("cta.appointment")}
       </Link>
