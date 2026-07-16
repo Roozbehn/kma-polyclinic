@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { sendMetaCapIEvent, type MetaStandardEvent } from "@/lib/meta/capi";
+import {
+  buildUserDataWithParamBuilder,
+  setBuilderCookiesOnNextResponse,
+} from "@/lib/meta/param-builder-server";
 import { createMemoryRateLimiter } from "@/lib/rate-limit";
 
 const limiter = createMemoryRateLimiter({ limit: 40, windowMs: 60_000 });
@@ -20,13 +24,14 @@ const schema = z.object({
   phone: z.string().max(40).optional().or(z.literal("")),
   firstName: z.string().max(80).optional().or(z.literal("")),
   lastName: z.string().max(80).optional().or(z.literal("")),
-  /** Facebook Login ID — plain text, not hashed. */
   fbLoginId: z.string().max(64).optional().or(z.literal("")),
   externalId: z.string().max(120).optional().or(z.literal("")),
   country: z.string().max(8).optional().or(z.literal("")),
   city: z.string().max(80).optional().or(z.literal("")),
-  fbp: z.string().max(200).optional(),
-  fbc: z.string().max(200).optional(),
+  /** From client Param Builder — preserve case. */
+  fbp: z.string().max(300).optional().or(z.literal("")),
+  fbc: z.string().max(500).optional().or(z.literal("")),
+  clientIp: z.string().max(80).optional().or(z.literal("")),
   customData: z
     .record(z.string(), z.union([z.string(), z.number(), z.array(z.string())]))
     .optional(),
@@ -45,11 +50,11 @@ export async function POST(req: NextRequest) {
   }
 
   const d = parsed.data;
-  const result = await sendMetaCapIEvent({
-    eventName: d.eventName as MetaStandardEvent,
-    eventId: d.eventId,
-    eventSourceUrl: d.eventSourceUrl,
-    user: {
+
+  // Meta Parameter Builder (server): fbc/fbp cookies + single-pass PII hash + best IP
+  const built = buildUserDataWithParamBuilder(
+    req,
+    {
       email: d.email || undefined,
       phone: d.phone || undefined,
       firstName: d.firstName || undefined,
@@ -58,13 +63,36 @@ export async function POST(req: NextRequest) {
       externalId: d.externalId || undefined,
       country: d.country || "tr",
       city: d.city || undefined,
-      clientIpAddress: ip === "unknown" ? undefined : ip,
-      clientUserAgent: req.headers.get("user-agent") || undefined,
-      fbp: d.fbp,
-      fbc: d.fbc,
     },
+    {
+      eventSourceUrl: d.eventSourceUrl,
+      clientFbp: d.fbp || undefined,
+      clientFbc: d.fbc || undefined,
+      clientIpFromBrowser: d.clientIp || undefined,
+    },
+  );
+
+  const result = await sendMetaCapIEvent({
+    eventName: d.eventName as MetaStandardEvent,
+    eventId: d.eventId,
+    eventSourceUrl: d.eventSourceUrl,
+    userData: built.userData,
     customData: d.customData,
   });
 
-  return NextResponse.json({ ok: result.ok, detail: result.detail });
+  const res = NextResponse.json({
+    ok: result.ok,
+    detail: result.detail,
+    /** Echo match keys presence for debugging (no raw PII). */
+    match: {
+      hasEm: Boolean(built.userData.em),
+      hasPh: Boolean(built.userData.ph),
+      hasFbp: Boolean(built.fbp),
+      hasFbc: Boolean(built.fbc),
+      hasIp: Boolean(built.clientIp),
+    },
+  });
+
+  setBuilderCookiesOnNextResponse(res, built.cookiesToSet);
+  return res;
 }

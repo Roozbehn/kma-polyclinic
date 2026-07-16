@@ -1,3 +1,8 @@
+/**
+ * Meta Conversions API sender.
+ * Prefer userData already built by `buildUserDataWithParamBuilder` (normalized+hashed once).
+ * Fallback `buildUserData` remains for unit tests / offline use without the SDK.
+ */
 import {
   hashCountry,
   hashEmail,
@@ -25,7 +30,6 @@ export type CapIUserInput = {
   zip?: string;
   country?: string;
   externalId?: string;
-  /** Facebook Login ID — must NOT be hashed. */
   fbLoginId?: string;
   clientIpAddress?: string;
   clientUserAgent?: string;
@@ -38,7 +42,10 @@ export type CapIEventInput = {
   eventId: string;
   eventSourceUrl: string;
   eventTime?: number;
-  user: CapIUserInput;
+  /** Prefer pre-built user_data from Parameter Builder (single hash). */
+  userData?: Record<string, string | string[]>;
+  /** Used only when userData is not provided. */
+  user?: CapIUserInput;
   customData?: Record<string, string | number | string[]>;
 };
 
@@ -48,11 +55,7 @@ type GraphResponse = {
   error?: { message?: string; type?: string; code?: number };
 };
 
-/**
- * Build Meta CAPI user_data per Customer Information Parameters.
- * Hashed: em, ph, fn, ln, ct, st, zp, country, external_id
- * Not hashed: client_ip_address, client_user_agent, fbp, fbc, fb_login_id
- */
+/** Fallback builder when Parameter Builder is unavailable. */
 export function buildUserData(user: CapIUserInput) {
   const userData: Record<string, string | string[]> = {};
 
@@ -92,7 +95,12 @@ export async function sendMetaCapIEvent(
     return { ok: false, detail: "meta_not_configured" };
   }
 
-  const userData = buildUserData(input.user);
+  const userData =
+    input.userData && Object.keys(input.userData).length > 0
+      ? input.userData
+      : input.user
+        ? buildUserData(input.user)
+        : {};
 
   const payload: {
     data: Record<string, unknown>[];

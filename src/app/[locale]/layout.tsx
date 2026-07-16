@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
+import { MetaParamBuilder } from "@/components/MetaParamBuilder";
 import { MetaPixel } from "@/components/MetaPixel";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -102,11 +103,13 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} dir={dir} suppressHydrationWarning>
       <body className={fontClass}>
-        <MetaPixel />
         <NextIntlClientProvider messages={messages}>
           <a className="skip-link" href="#main-content">
             {tA11y("skip")}
           </a>
+          {/* Param Builder first: capture _fbc/_fbp/IP early for EMQ. */}
+          <MetaParamBuilder />
+          <MetaPixel />
           <SiteHeader />
           <div id="main-content">{children}</div>
           <SiteFooter />

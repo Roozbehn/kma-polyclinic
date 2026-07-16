@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Vendored Meta CAPI Parameter Builder browser bundle
+    "public/meta/**",
   ]),
 ]);
 

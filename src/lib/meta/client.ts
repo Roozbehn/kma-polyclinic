@@ -1,6 +1,10 @@
 "use client";
 
 import {
+  ensureMetaParamBuilderReady,
+  getParamBuilderIds,
+} from "@/components/MetaParamBuilder";
+import {
   readMetaStoredUser,
   toPixelAdvancedMatching,
   tryReadFacebookLoginId,
@@ -19,6 +23,7 @@ export type ClientMetaEvent =
 function readCookie(name: string): string | undefined {
   if (typeof document === "undefined") return undefined;
   const match = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
+  // Preserve original case (especially for _fbc).
   return match ? decodeURIComponent(match[1]) : undefined;
 }
 
@@ -29,14 +34,16 @@ export function newMetaEventId(): string {
   return `evt_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
 }
 
+/** Prefer Parameter Builder values; fall back to raw cookies. */
 export function getMetaClickIds() {
+  const fromBuilder = getParamBuilderIds();
   return {
-    fbp: readCookie("_fbp"),
-    fbc: readCookie("_fbc"),
+    fbp: fromBuilder.fbp || readCookie("_fbp"),
+    fbc: fromBuilder.fbc || readCookie("_fbc"),
+    clientIp: fromBuilder.clientIp,
   };
 }
 
-/** Merge runtime fields with localStorage identity + optional FB Login id. */
 export function resolveMetaUser(overrides?: MetaStoredUser): MetaStoredUser {
   const stored = readMetaStoredUser();
   const fbLoginId =
@@ -51,17 +58,12 @@ export function resolveMetaUser(overrides?: MetaStoredUser): MetaStoredUser {
   };
 }
 
-/**
- * Re-apply Advanced Matching when we learn email/phone/fb_login_id
- * (e.g. after appointment form). Safe if Pixel not loaded.
- */
 export function applyMetaAdvancedMatching(user?: MetaStoredUser) {
   if (typeof window === "undefined" || typeof window.fbq !== "function") return;
   const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID;
   if (!pixelId) return;
   const am = toPixelAdvancedMatching(user || resolveMetaUser());
   if (Object.keys(am).length === 0) return;
-  // Re-init with advanced matching improves EMQ for subsequent browser events.
   window.fbq("init", pixelId, am);
 }
 
@@ -74,7 +76,10 @@ export function trackMetaPixel(
   window.fbq("track", eventName, params || {}, { eventID: eventId });
 }
 
-/** Pixel + server CAPI with shared event_id for dedupe. Always attaches stored PII when present. */
+/**
+ * Pixel + CAPI with shared event_id.
+ * Uses Meta Parameter Builder for fbc/fbp/IP; server hashes PII once.
+ */
 export async function trackMetaEvent(opts: {
   eventName: ClientMetaEvent;
   eventId?: string;
@@ -88,9 +93,7 @@ export async function trackMetaEvent(opts: {
   city?: string;
   customData?: Record<string, string | number | string[]>;
   eventSourceUrl?: string;
-  /** Persist provided identity for future ViewContent matching. */
   persistUser?: boolean;
-  /** Skip browser pixel (e.g. CAPI-only PageView after Pixel already fired). */
   skipPixel?: boolean;
 }) {
   if (opts.persistUser) {
@@ -107,6 +110,9 @@ export async function trackMetaEvent(opts: {
     applyMetaAdvancedMatching();
   }
 
+  // Ensure client Param Builder collected cookies as early as possible.
+  await ensureMetaParamBuilderReady();
+
   const user = resolveMetaUser({
     email: opts.email,
     phone: opts.phone,
@@ -119,7 +125,7 @@ export async function trackMetaEvent(opts: {
   });
 
   const eventId = opts.eventId || newMetaEventId();
-  const { fbp, fbc } = getMetaClickIds();
+  const { fbp, fbc, clientIp } = getMetaClickIds();
   if (!opts.skipPixel) {
     trackMetaPixel(opts.eventName, eventId, opts.customData);
   }
@@ -140,8 +146,9 @@ export async function trackMetaEvent(opts: {
         externalId: user.externalId || "",
         country: user.country || "tr",
         city: user.city || "",
-        fbp,
-        fbc,
+        fbp: fbp || "",
+        fbc: fbc || "",
+        clientIp: clientIp || "",
         customData: opts.customData,
       }),
       keepalive: true,

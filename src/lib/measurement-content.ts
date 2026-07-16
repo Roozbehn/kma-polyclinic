@@ -148,6 +148,7 @@ const en: MeasurementPage = {
     "ViewContent — service and department pages (Pixel + CAPI, shared event_id)",
     "Schedule / Lead — appointment form (Pixel + server CAPI; Schedule uses the form event_id on both sides)",
     "Contact / FindLocation — phone, email, and map interactions when tracked",
+    "Meta Parameter Builder (client JS + Node) manages fbc/fbp cookies, client IP, and single-pass PII normalize+hash for EMQ",
     "fbp / fbc cookies and optional external_id support additional matching",
   ],
   linksHeading: "Meta documentation",
