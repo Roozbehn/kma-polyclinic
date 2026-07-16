@@ -27,8 +27,14 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: true });
   }
 
+  // Client also sends Schedule/Lead with browser-side event_id for Pixel dedupe.
+  // Server sends a companion CAPI event with em/ph (+ name split) for high EMQ.
   const eventId = parsed.data.eventId;
   if (eventId && parsed.data.eventSourceUrl) {
+    const nameParts = parsed.data.name.trim().split(/\s+/).filter(Boolean);
+    const firstName = nameParts[0];
+    const lastName = nameParts.length > 1 ? nameParts.slice(1).join(" ") : undefined;
+    const digits = parsed.data.phone.replace(/\D/g, "");
     void sendMetaCapIEvent({
       eventName: "Schedule",
       eventId,
@@ -36,6 +42,10 @@ export async function POST(req: NextRequest) {
       user: {
         email: parsed.data.email || undefined,
         phone: parsed.data.phone,
+        firstName,
+        lastName,
+        country: "tr",
+        externalId: digits ? `lead_${digits.slice(-10)}` : undefined,
         clientIpAddress: ip === "unknown" ? undefined : ip,
         clientUserAgent: req.headers.get("user-agent") || undefined,
         fbp: parsed.data.fbp,

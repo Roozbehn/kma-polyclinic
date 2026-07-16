@@ -1,15 +1,32 @@
-import { hashEmail, hashPhone } from "@/lib/meta/hash";
+import {
+  hashCountry,
+  hashEmail,
+  hashExternalId,
+  hashGeoText,
+  hashName,
+  hashPhone,
+} from "@/lib/meta/hash";
 
 export type MetaStandardEvent =
   | "PageView"
   | "ViewContent"
   | "Contact"
   | "Schedule"
-  | "FindLocation";
+  | "FindLocation"
+  | "Lead";
 
 export type CapIUserInput = {
   email?: string;
   phone?: string;
+  firstName?: string;
+  lastName?: string;
+  city?: string;
+  state?: string;
+  zip?: string;
+  country?: string;
+  externalId?: string;
+  /** Facebook Login ID — must NOT be hashed. */
+  fbLoginId?: string;
   clientIpAddress?: string;
   clientUserAgent?: string;
   fbp?: string;
@@ -31,25 +48,51 @@ type GraphResponse = {
   error?: { message?: string; type?: string; code?: number };
 };
 
-function buildUserData(user: CapIUserInput) {
+/**
+ * Build Meta CAPI user_data per Customer Information Parameters.
+ * Hashed: em, ph, fn, ln, ct, st, zp, country, external_id
+ * Not hashed: client_ip_address, client_user_agent, fbp, fbc, fb_login_id
+ */
+export function buildUserData(user: CapIUserInput) {
   const userData: Record<string, string | string[]> = {};
+
   const em = hashEmail(user.email);
   const ph = hashPhone(user.phone);
+  const fn = hashName(user.firstName);
+  const ln = hashName(user.lastName);
+  const ct = hashGeoText(user.city);
+  const st = hashGeoText(user.state);
+  const country = hashCountry(user.country);
+  const externalId = hashExternalId(user.externalId);
+
   if (em) userData.em = [em];
   if (ph) userData.ph = [ph];
+  if (fn) userData.fn = [fn];
+  if (ln) userData.ln = [ln];
+  if (ct) userData.ct = [ct];
+  if (st) userData.st = [st];
+  if (country) userData.country = [country];
+  if (externalId) userData.external_id = [externalId];
+
   if (user.clientIpAddress) userData.client_ip_address = user.clientIpAddress;
   if (user.clientUserAgent) userData.client_user_agent = user.clientUserAgent;
   if (user.fbp) userData.fbp = user.fbp;
   if (user.fbc) userData.fbc = user.fbc;
+  if (user.fbLoginId) userData.fb_login_id = user.fbLoginId;
+
   return userData;
 }
 
-export async function sendMetaCapIEvent(input: CapIEventInput): Promise<{ ok: boolean; detail?: string }> {
+export async function sendMetaCapIEvent(
+  input: CapIEventInput,
+): Promise<{ ok: boolean; detail?: string }> {
   const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID;
   const token = process.env.META_CAPI_ACCESS_TOKEN;
   if (!pixelId || !token) {
     return { ok: false, detail: "meta_not_configured" };
   }
+
+  const userData = buildUserData(input.user);
 
   const payload: {
     data: Record<string, unknown>[];
@@ -62,7 +105,7 @@ export async function sendMetaCapIEvent(input: CapIEventInput): Promise<{ ok: bo
         event_id: input.eventId,
         event_source_url: input.eventSourceUrl,
         action_source: "website",
-        user_data: buildUserData(input.user),
+        user_data: userData,
         ...(input.customData ? { custom_data: input.customData } : {}),
       },
     ],

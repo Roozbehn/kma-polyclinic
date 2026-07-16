@@ -1,6 +1,13 @@
 "use client";
 
 import Script from "next/script";
+import { useEffect } from "react";
+import {
+  applyMetaAdvancedMatching,
+  newMetaEventId,
+  resolveMetaUser,
+  trackMetaEvent,
+} from "@/lib/meta/client";
 
 const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 
@@ -11,7 +18,31 @@ declare global {
   }
 }
 
+/**
+ * Meta Pixel bootstrap + Advanced Matching refresh when email/phone/fb_login_id known.
+ * Browser PageView fires once via init script; CAPI PageView is sent separately
+ * with the same user_data enrichment (em/ph/fb_login_id) for Event Match Quality.
+ */
 export function MetaPixel() {
+  useEffect(() => {
+    if (!PIXEL_ID) return;
+
+    const refreshAm = window.setTimeout(() => {
+      applyMetaAdvancedMatching(resolveMetaUser());
+    }, 800);
+
+    // Server-side PageView for EMQ — do not fire a second browser PageView.
+    const eventId = newMetaEventId();
+    void trackMetaEvent({
+      eventName: "PageView",
+      eventId,
+      skipPixel: true,
+      customData: { content_name: "page" },
+    });
+
+    return () => window.clearTimeout(refreshAm);
+  }, []);
+
   if (!PIXEL_ID) return null;
 
   return (

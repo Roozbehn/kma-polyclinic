@@ -3,7 +3,13 @@
 import { FormEvent, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { NAP } from "@/lib/nap";
-import { getMetaClickIds, newMetaEventId, trackMetaEvent, trackMetaPixel } from "@/lib/meta/client";
+import {
+  getMetaClickIds,
+  newMetaEventId,
+  trackMetaEvent,
+  trackMetaPixel,
+} from "@/lib/meta/client";
+import { splitPersonName, writeMetaStoredUser } from "@/lib/meta/user-data";
 
 export type ContactDepartmentOption = {
   slug: string;
@@ -38,6 +44,17 @@ export function ContactPanel({ departments }: ContactPanelProps) {
     const eventId = newMetaEventId();
     const { fbp, fbc } = getMetaClickIds();
 
+    const { firstName, lastName } = splitPersonName(name);
+    // Persist for future ViewContent EMQ (email / phone / name).
+    writeMetaStoredUser({
+      email: email || undefined,
+      phone,
+      firstName,
+      lastName,
+      country: "tr",
+      externalId: `lead_${phone.replace(/\D/g, "").slice(-10) || Date.now()}`,
+    });
+
     trackMetaPixel("Schedule", eventId, {
       content_category: "appointment",
       ...(department ? { content_name: department } : {}),
@@ -63,6 +80,23 @@ export function ContactPanel({ departments }: ContactPanelProps) {
         }),
       });
       if (!res.ok) throw new Error("lead_failed");
+
+      // Persist em/ph for future ViewContent; fire Lead (Pixel+CAPI).
+      // Schedule CAPI is sent server-side from /api/leads with the same eventId.
+      void trackMetaEvent({
+        eventName: "Lead",
+        email: email || undefined,
+        phone,
+        firstName,
+        lastName,
+        country: "tr",
+        persistUser: true,
+        customData: {
+          content_category: "appointment",
+          content_name: department || "contact_form",
+        },
+      });
+
       setStatus("success");
       form.reset();
     } catch {
